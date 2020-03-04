@@ -1,20 +1,27 @@
 <template>
   <div id="app">
     <app-landing-page></app-landing-page>
+    <app-about></app-about>
   </div>
 </template>
 
 <script>
 import LandingPage from "@/views/LandingPage.vue";
+import About from "@/views/About.vue";
 
 export default {
   name: "app",
   components: {
-    AppLandingPage: LandingPage
+    AppLandingPage: LandingPage,
+    AppAbout: About
   }
 };
 </script>
 
-<style>
-@import "./styles/_normalize.scss";
+<style lang="scss">
+@import "./sass/main.scss";
+body {
+  font-family: "Arimo";
+  width: 100%;
+}
 </style>
