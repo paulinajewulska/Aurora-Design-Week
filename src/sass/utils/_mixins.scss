@@ -1,0 +1,15 @@
+// About section
+@mixin about-grid($column-start, $column-end, $row-start, $row-end) {
+    grid-column-start: $column-start;
+    grid-column-end:  $column-end;
+    grid-row-start: $row-start;
+    grid-row-end: $row-end;
+}
+
+// Others
+@mixin line($width) {
+        width: $width;
+        height: 1px;
+        margin: 2rem 0 1rem;
+        background-color: $light-gray;
+}

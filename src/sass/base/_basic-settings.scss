@@ -1,0 +1,17 @@
+body {
+  color: $black !important;
+}
+
+section {
+  padding: 2rem;
+   @media only screen and (min-width: $tablet) {
+    padding: 4rem;
+  }
+     @media only screen and (min-width: $desktop) {
+    padding: 6rem;
+  }
+}
+
+p {
+    margin: 1rem 0;
+}
