@@ -84,6 +84,7 @@ export default {
     margin: 1rem auto;
   }
   &__paragraph {
+    margin: 1rem 0;
     &:nth-of-type(1) {
       @include about-grid(2, 3, 1, 3);
     }
