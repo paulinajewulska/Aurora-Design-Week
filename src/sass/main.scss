@@ -2,7 +2,8 @@
 @import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
 
 @import "base/_normalize.scss";
-@import "base/basic-settings.scss";
+@import "base/_basic-settings.scss";
+@import "base/_typography.scss";
 
 @import "utils/_variables.scss";
 @import "utils/_mixins.scss";

@@ -1,5 +1,22 @@
 <template>
   <section class="landing-page">
+    <div class="landing-page__title-wrapper">
+      <h1 class="landing-page__title columns is-mobile is-full-desktop">
+        <span class="column landing-page__title__word">Aurora</span>
+        <span
+          class="column is-offset-3-touch is-offset-2-desktop landing-page__title__word"
+          >Design</span
+        >
+        <span
+          class="column is-offset-1-touch is-offset-1-desktop landing-page__title__word"
+          >Week</span
+        >
+        <span class="column landing-page__title__word">2019</span>
+      </h1>
+    </div>
+    <div class="landing-page__data columns is-mobile is-full">
+      <p class="column landing-page__data__word">JUNE 13 - 20</p>
+    </div>
     <div class="landing-page__arrow-container">
       <div class="landing-page__arrow"></div>
     </div>
@@ -33,6 +50,32 @@ export default {
 .landing-page {
   width: 100vw;
   height: 100vh;
+  &__title {
+    position: absolute;
+    top: 5%;
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+    &__word {
+      margin: 0 initial;
+      padding: 0;
+      &:last-of-type {
+        margin-top: 2.5rem;
+      }
+    }
+  }
+  &__data {
+    position: absolute;
+    top: 75%;
+    width: 100%;
+    font-size: 2em;
+    @media only screen and (min-width: $tablet) {
+      font-size: 3em;
+    }
+    @media only screen and (min-width: $desktop) {
+      font-size: 4em;
+    }
+  }
   &__arrow-container {
     position: absolute;
     right: calc(2rem + 0.625rem / 2);
