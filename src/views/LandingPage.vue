@@ -1,22 +1,28 @@
 <template>
   <section class="landing-page">
-    <div class="landing-page__title-wrapper">
-      <h1 class="landing-page__title columns is-mobile is-full-desktop">
-        <span class="column landing-page__title__word">Aurora</span>
-        <span
-          class="column is-offset-3-touch is-offset-2-desktop landing-page__title__word"
-          >Design</span
-        >
-        <span
-          class="column is-offset-1-touch is-offset-1-desktop landing-page__title__word"
-          >Week</span
-        >
-        <span class="column landing-page__title__word">2019</span>
-      </h1>
-    </div>
-    <div class="landing-page__data columns is-mobile is-full">
-      <p class="column landing-page__data__word">JUNE 13 - 20</p>
-    </div>
+    <h1 class="landing-page__title columns is-mobile">
+      <span class="column landing-page__title__word">Aurora</span>
+      <span
+        class="column is-offset-3-touch is-offset-2-desktop landing-page__title__word"
+        >Design</span
+      >
+      <span
+        class="column is-offset-1-touch is-offset-1-desktop landing-page__title__word"
+        >Week</span
+      >
+      <span class="column landing-page__title__word">2019</span>
+    </h1>
+    <p class="column is-half landing-page__date">JUNE 13 - 20</p>
+    <p
+      class="column is-3-desktop is-offset-7-desktop is-hidden-touch landing-page__paragraph"
+    >
+      7 days of free for all talks, designs, installations & performances.
+    </p>
+    <ul class="landing-page__social-media__list is-hidden-touch">
+      <li class="landing-page__social-media__list-item">Facebook</li>
+      <li class="landing-page__social-media__list-item">Twitter</li>
+      <li class="landing-page__social-media__list-item">Instagram</li>
+    </ul>
     <div class="landing-page__arrow-container">
       <div class="landing-page__arrow"></div>
     </div>
@@ -56,6 +62,8 @@ export default {
     display: flex;
     flex-direction: column;
     text-transform: uppercase;
+
+    width: 75%;
     &__word {
       margin: 0 initial;
       padding: 0;
@@ -64,25 +72,31 @@ export default {
       }
     }
   }
-  &__data {
+  &__date {
     position: absolute;
-    top: 75%;
+    bottom: 5%;
     width: 100%;
+    margin: 0;
+    padding: 0;
     font-size: 2em;
     @media only screen and (min-width: $tablet) {
-      font-size: 3em;
+      font-size: 2.25em;
     }
-    @media only screen and (min-width: $desktop) {
-      font-size: 4em;
-    }
+  }
+  &__paragraph {
+    position: absolute;
+    top: 50%;
   }
   &__arrow-container {
     position: absolute;
     right: calc(2rem + 0.625rem / 2);
-    bottom: calc(2rem + 0.1rem);
+    bottom: 4%;
     width: 2rem;
     height: 4rem;
     overflow: hidden;
+    @media only screen and (min-width: $desktop) {
+      right: calc(50% - 1rem);
+    }
   }
   &__arrow {
     position: absolute;
@@ -90,7 +104,7 @@ export default {
     width: calc(0.25rem / 2);
     height: 3rem;
     background-color: $black;
-    animation: arrow-animation 2s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    // animation: arrow-animation 2s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
     &::before,
     &::after {
       content: "";
@@ -107,6 +121,20 @@ export default {
     &::after {
       right: calc(0.55rem / 2);
       transform: rotate(-45deg);
+    }
+  }
+  &__social-media {
+    &__list {
+      position: absolute;
+      right: 6rem;
+      bottom: 5%;
+      display: flex;
+      transform: rotate(-180deg);
+      writing-mode: vertical-rl;
+    }
+    &__list-item {
+      padding: 0.25rem 0;
+      font-size: 0.7em;
     }
   }
 }

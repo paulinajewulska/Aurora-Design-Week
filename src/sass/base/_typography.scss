@@ -1,12 +1,9 @@
 h1 {
     margin: 0;
-    width: 100%;
+    width: fit-content;
     line-height: 0.8em !important;
     font-size: 4em;
-      @media only screen and (min-width: $tablet) {
-      font-size: 5em;
-    }
-      @media only screen and (min-width: $desktop) {
-      font-size: 6em;
+    @media only screen and (min-width: $tablet) {
+      font-size: 4.5em;
     }
 }
