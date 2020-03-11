@@ -13,3 +13,9 @@
         margin: 2rem 0 1rem;
         background-color: $light-gray;
 }
+
+@mixin calendar-month-day-width($breakpoint, $count) {
+ @media only screen and (min-width: $breakpoint) {
+    width: calc(100% / #{$count});
+  }
+}
