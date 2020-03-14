@@ -1,4 +1,6 @@
 body {
+  width: 100%;
+  font-family: "Arimo";
   color: $black !important;
 }
 
@@ -7,7 +9,7 @@ section {
    @media only screen and (min-width: $tablet) {
     padding: 4rem;
   }
-     @media only screen and (min-width: $desktop) {
-    padding: 6rem;
+  @media only screen and (min-width: $desktop) {
+    padding: 5rem 7rem;
   }
 }

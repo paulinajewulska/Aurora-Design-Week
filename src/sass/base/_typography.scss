@@ -6,4 +6,7 @@ h1 {
     @media only screen and (min-width: $tablet) {
       font-size: 4.5em;
     }
+    @media only screen and (min-width: $fullhd) {
+      font-size: 6em;
+    }
 }
