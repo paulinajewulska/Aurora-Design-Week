@@ -50,8 +50,7 @@ export default {
   computed: {
     images() {
       return [
-        require("../assets/LandingPage/dialogue.png"),
-        require("../assets/LandingPage/eufone.png"),
+        require("../assets/LandingPage/people.png"),
         require("../assets/LandingPage/woman.png")
       ];
     }
@@ -73,10 +72,27 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/main.scss";
 
+@keyframes animate {
+  0% {
+    transform: translateY(-6rem);
+    opacity: 0.5;
+  }
+  35%,
+  65% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(6rem);
+    opacity: 0;
+  }
+}
+
 .landing-page {
   z-index: 1;
   width: 100vw;
   height: 100vh;
+  color: $light-gray;
   &__slideshow {
     position: absolute;
     top: 0;
@@ -93,7 +109,7 @@ export default {
     text-transform: uppercase;
     width: 75%;
     @media only screen and (min-width: $desktop) {
-      top: 5rem;
+      top: 3.5rem;
     }
 
     &__word {
@@ -114,7 +130,7 @@ export default {
       font-size: 2.25em;
     }
     @media only screen and (min-width: $desktop) {
-      bottom: 5rem;
+      bottom: 3.5rem;
     }
   }
   &__paragraph {
@@ -132,7 +148,7 @@ export default {
       right: calc(50% - 1rem);
     }
     @media only screen and (min-width: $desktop) {
-      bottom: 5rem;
+      bottom: 3.5rem;
     }
   }
   &__arrow {
@@ -140,7 +156,8 @@ export default {
     left: calc(50% - (0.25rem / 4));
     width: calc(0.25rem / 2);
     height: 3rem;
-    background-color: $black;
+    background-color: $light-gray;
+    animation: animate 4.25s infinite 4.25s;
     &::before,
     &::after {
       content: "";
@@ -148,7 +165,7 @@ export default {
       top: 75%;
       width: 100%;
       height: 30%;
-      background-color: $black;
+      background-color: $white;
     }
     &::before {
       left: calc(0.55rem / 2);
@@ -168,7 +185,7 @@ export default {
       transform: rotate(-180deg);
       writing-mode: vertical-rl;
       @media only screen and (min-width: $desktop) {
-        bottom: 5rem;
+        bottom: 3.5rem;
       }
     }
     &__list-item {
