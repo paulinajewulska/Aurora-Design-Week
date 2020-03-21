@@ -4,23 +4,32 @@
       class="landing-page__slideshow"
       :images="images"
       :displacement="require('../assets/LandingPage/displacement.jpg')"
-      :intensity="0.3"
+      :intensity="0.5"
       :speedIn="1.5"
       :speedOut="1.5"
+      :angle="Math.PI / 3"
       ease="expo.out"
       ref="slideshow"
     ></vue-displacement-slideshow>
     <h1 class="landing-page__title columns is-mobile">
-      <span class="column landing-page__title__word">Aurora</span>
-      <span
-        class="column is-offset-3-touch is-offset-2-desktop landing-page__title__word"
-        >Design</span
-      >
-      <span
-        class="column is-offset-1-touch is-offset-1-desktop landing-page__title__word"
-        >Week</span
-      >
-      <span class="column landing-page__title__word">2019</span>
+      <div class="landing-page__title__word-wrapper">
+        <span class="column landing-page__title__word">Aurora</span>
+      </div>
+      <div class="landing-page__title__word-wrapper">
+        <span
+          class="column is-offset-3-touch is-offset-2-desktop landing-page__title__word"
+          >Design</span
+        >
+      </div>
+      <div class="landing-page__title__word-wrapper">
+        <span
+          class="column is-offset-1-touch is-offset-1-desktop landing-page__title__word"
+          >Week</span
+        >
+      </div>
+      <div class="landing-page__title__word-wrapper">
+        <span class="column landing-page__title__word">2019</span>
+      </div>
     </h1>
     <p class="column landing-page__date">JUNE 13 - 20</p>
     <p
@@ -41,6 +50,7 @@
 
 <script>
 import VueDisplacementSlideshow from "vue-displacement-slideshow";
+import { gsap } from "gsap";
 
 export default {
   name: "LandingPage",
@@ -57,14 +67,26 @@ export default {
   },
   methods: {
     init() {
-      //We loop through all our images by calling the 'next' method of our component every 2 seconds
+      //We loop through all our images by calling the 'next' method of our component every 4.25 seconds
       setInterval(() => {
         this.$refs.slideshow.next();
       }, 4250);
+    },
+    animateText(className, delay, duration, y) {
+      gsap.from(`.${className}`, {
+        opacity: 0,
+        duration: duration,
+        y: y,
+        delay: delay,
+        ease: "power4.out"
+      });
     }
   },
   mounted() {
     this.init();
+    this.animateText("landing-page__title__word", 1.5, 1.5, "100%");
+    this.animateText("landing-page__date", 2, 1.5, "2vh");
+    this.animateText("landing-page__paragraph", 2.5, 1.5, "2vh");
   }
 };
 </script>
@@ -112,12 +134,20 @@ export default {
       top: 3.5rem;
     }
 
-    &__word {
+    &__word-wrapper {
       margin: 0 initial;
       padding: 0;
+      position: relative;
+      overflow: hidden;
+      height: 0.9em;
       &:last-of-type {
         margin-top: 2.5rem;
       }
+    }
+    &__word {
+      padding: 0;
+      position: absolute;
+      z-index: 10;
     }
   }
   &__date {
