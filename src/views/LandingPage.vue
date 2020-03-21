@@ -4,7 +4,7 @@
       class="landing-page__slideshow"
       :images="images"
       :displacement="require('../assets/LandingPage/displacement.jpg')"
-      :intensity="0.5"
+      :intensity="0.8"
       :speedIn="1.5"
       :speedOut="1.5"
       :angle="Math.PI / 3"
@@ -60,17 +60,19 @@ export default {
   computed: {
     images() {
       return [
-        require("../assets/LandingPage/people.png"),
-        require("../assets/LandingPage/woman.png")
+        require("../assets/LandingPage/hands.jpg"),
+        require("../assets/LandingPage/museum.jpg"),
+        require("../assets/LandingPage/woman.png"),
+        require("../assets/LandingPage/stairs.jpg")
       ];
     }
   },
   methods: {
     init() {
-      //We loop through all our images by calling the 'next' method of our component every 4.25 seconds
+      //We loop through all our images by calling the 'next' method of our component every 6 seconds
       setInterval(() => {
         this.$refs.slideshow.next();
-      }, 4250);
+      }, 6000);
     },
     animateText(className, delay, duration, y) {
       gsap.from(`.${className}`, {
