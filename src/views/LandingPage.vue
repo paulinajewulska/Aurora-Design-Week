@@ -38,9 +38,16 @@
       7 days of free for all talks, designs, installations & performances.
     </p>
     <ul class="landing-page__social-media__list is-hidden-touch">
-      <li class="landing-page__social-media__list-item">Facebook</li>
-      <li class="landing-page__social-media__list-item">Twitter</li>
-      <li class="landing-page__social-media__list-item">Instagram</li>
+      <li class="landing-page__social-media__list-item">
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+      </li>
+      <li class="landing-page__social-media__list-item">
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+      </li>
+
+      <li class="landing-page__social-media__list-item">
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+      </li>
     </ul>
     <div class="landing-page__arrow-container">
       <div class="landing-page__arrow"></div>
@@ -216,6 +223,7 @@ export default {
       display: flex;
       transform: rotate(-180deg);
       writing-mode: vertical-rl;
+      letter-spacing: 0.05rem;
       @media only screen and (min-width: $desktop) {
         bottom: 3.5rem;
       }
