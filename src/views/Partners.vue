@@ -1,11 +1,15 @@
 <template>
   <section class="partners">
-    <app-subtitle :subtitle="this.name"></app-subtitle>
-    <p class="partners__paragraph">
+    <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
+    <p class="partners__paragraph" v-parallax="0.3">
       Thanks everyone partners for helping make Aurora Design Week happen!
     </p>
     <ul class="partners__list">
-      <li v-for="partner in partnerLogoSrcPath" :key="partner.name">
+      <li
+        v-for="partner in partnerLogoSrcPath"
+        :key="partner.name"
+        v-parallax="0.2"
+      >
         <img
           :src="
             require(`@/assets/partners/${partner.name}.${partner.fileExtension}`)

@@ -1,7 +1,7 @@
 <template>
   <section class="calendar">
-    <app-subtitle :subtitle="this.name"></app-subtitle>
-    <app-calendar-month monthName="July"></app-calendar-month>
+    <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
+    <app-calendar-month monthName="July" v-parallax="0.2"></app-calendar-month>
   </section>
 </template>
 

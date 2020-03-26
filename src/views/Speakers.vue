@@ -1,11 +1,12 @@
 <template>
   <section class="speakers">
-    <app-subtitle :subtitle="this.name"></app-subtitle>
+    <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
     <ul class="speakers__list">
       <li
         v-for="speaker in speakers"
         :key="speaker.name"
         class="speakers__list-item"
+        v-parallax="0.2"
       >
         <div class="speakers__list-item__name">{{ speaker.name }}</div>
         <div class="speakers__list-item__surname">{{ speaker.surname }}</div>
