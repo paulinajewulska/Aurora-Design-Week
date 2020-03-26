@@ -19,3 +19,23 @@
     width: calc(100% / #{$count});
   }
 }
+
+@mixin translate($value1, $value2, $value3) {
+  transform: translateY($value2);
+  @media only screen and (max-width: $tablet) {
+    transform: translateY($value1);
+  }
+  @media only screen and (min-width: $fullhd) {
+    transform: translateY($value3);
+  }
+}
+
+@mixin set-property-and-value($property, $value1, $value2, $value3) {
+  #{$property}: $value1;
+  @media only screen and (max-width: $tablet) {
+    #{$property}: $value2;
+  }
+  @media only screen and (min-width: $fullhd) {
+    #{$property}: $value3;
+  }
+}

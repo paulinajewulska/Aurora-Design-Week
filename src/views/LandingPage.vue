@@ -134,13 +134,16 @@ export default {
   }
   &__title {
     position: absolute;
-    top: 5%;
+    top: 15%;
     display: flex;
     flex-direction: column;
     text-transform: uppercase;
     width: 75%;
     @media only screen and (min-width: $desktop) {
       top: 3.5rem;
+    }
+    @media only screen and (min-width: $tablet) {
+      top: 5%;
     }
 
     &__word-wrapper {
@@ -156,7 +159,7 @@ export default {
     &__word {
       padding: 0;
       position: absolute;
-      z-index: 10;
+      z-index: 5;
     }
   }
   &__date {

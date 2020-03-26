@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <app-burger></app-burger>
+    <app-slidebar></app-slidebar>
     <app-landing-page></app-landing-page>
     <app-about></app-about>
     <app-speakers></app-speakers>
@@ -9,6 +11,8 @@
 </template>
 
 <script>
+import Burger from "@/components/BurgerMenu/Burger.vue";
+import Slidebar from "@/components/BurgerMenu/Slidebar.vue";
 import LandingPage from "@/views/LandingPage.vue";
 import About from "@/views/About.vue";
 import Speakers from "@/views/Speakers.vue";
@@ -18,6 +22,8 @@ import Calendar from "@/views/Calendar.vue";
 export default {
   name: "app",
   components: {
+    AppBurger: Burger,
+    AppSlidebar: Slidebar,
     AppLandingPage: LandingPage,
     AppAbout: About,
     AppSpeakers: Speakers,
@@ -29,8 +35,4 @@ export default {
 
 <style lang="scss">
 @import "./sass/main.scss";
-body {
-  font-family: "Arimo";
-  width: 100%;
-}
 </style>

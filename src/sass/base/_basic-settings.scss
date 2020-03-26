@@ -5,15 +5,11 @@ body {
 }
 
 section {
-  padding: 2.5rem;
+  padding: $padding-mobile;
    @media only screen and (min-width: $tablet) {
-    padding: 4rem;
+    padding: $padding-tablet;
   }
   @media only screen and (min-width: $desktop) {
-    padding: 3.5rem 7rem;
+    padding: $padding-fullhd / 2 $padding-mobile;
   }
-}
-
-a {
-  color: $light-gray;
 }
