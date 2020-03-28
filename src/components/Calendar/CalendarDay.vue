@@ -44,8 +44,8 @@ $denominators: 3, 3, 4, 5;
     );
   }
   width: 50%;
-  height: fit-content;
-  padding: 0.75rem 0.75rem 0.75rem 0;
+  height: 10rem;
+  padding: 0.9rem 0.75rem 0.9rem 0;
   &__date {
     margin-bottom: 0.25rem;
     font-size: 1.5rem;

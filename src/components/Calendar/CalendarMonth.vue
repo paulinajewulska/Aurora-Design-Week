@@ -10,9 +10,11 @@
       </p>
       <div class="calendar__month__days-wrapper">
         <app-calendar-day
-          date="05"
-          place="place"
-          time="19:00"
+          v-for="day in getEvents(monthName)"
+          :key="day.id"
+          :date="day.day"
+          :place="day.place"
+          :time="day.time"
         ></app-calendar-day>
       </div>
     </div>
@@ -21,18 +23,18 @@
 
 <script>
 import CalendarDay from "./CalendarDay.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "CalendatMonth",
-  data: function() {
-    return {};
-  },
   props: {
     monthName: {
       type: String,
-      required: true,
-      default: "JULY"
+      required: true
     }
+  },
+  computed: {
+    ...mapGetters(["getEvents"])
   },
   components: {
     AppCalendarDay: CalendarDay
@@ -58,6 +60,10 @@ $denominators: 4, 5, 6;
       height: 100%;
       padding: 0.75rem 0.75rem 0.75rem 0;
     }
+    &--desktop,
+    &--touch {
+      text-transform: capitalize;
+    }
   }
   &__line {
     @include line(100%);
@@ -71,6 +77,7 @@ $denominators: 4, 5, 6;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    margin-bottom: 1.75rem;
   }
 }
 </style>
