@@ -104,6 +104,28 @@ export default new Vuex.Store({
           }
         ]
       }
+    ],
+    questions: [
+      {
+        question: "Why do we need the rare masterclass?",
+        answer:
+          "Creative and tech departments across the country are lacking in diversity of gender, colour, class, preference and perspective – especially at the top. Being a minority brings about a set of issues that many aren’t equipped to deal with, leading to great talent dropping out of the industry prematurely."
+      },
+      {
+        question: "When and where is the rare masterclass?",
+        answer:
+          "It will take place on the grounds of the Semi Permanent festival in Sydney, May 23 — 24."
+      },
+      {
+        question: "Where do the profits from rare go?",
+        answer:
+          "All proceeds from Rare will be put towards grants and initiatives that further deliver on Rare’s objective to drive diversity across the creative, media and tech industries."
+      },
+      {
+        question: "What happens if i can’t make it?",
+        answer:
+          "If you can’t make those dates, or can’t get the time off work, keep an eye on this site. We’re constantly updating our schedule with new Masterclasses, all over the world. So chances are, there’ll be another Masterclass popping up near you soon."
+      }
     ]
   },
   getters: {

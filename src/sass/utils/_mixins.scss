@@ -10,7 +10,6 @@
 @mixin line($width) {
         width: $width;
         height: 1px;
-        margin: 2rem 0 1rem;
         background-color: $light-gray;
 }
 

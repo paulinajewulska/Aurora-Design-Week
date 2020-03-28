@@ -3,10 +3,11 @@
     <app-burger></app-burger>
     <app-slidebar></app-slidebar>
     <app-landing-page></app-landing-page>
+    <app-f-a-q></app-f-a-q>
+    <app-calendar></app-calendar>
     <app-about></app-about>
     <app-speakers></app-speakers>
     <app-partners></app-partners>
-    <app-calendar></app-calendar>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import About from "@/views/About.vue";
 import Speakers from "@/views/Speakers.vue";
 import Partners from "@/views/Partners.vue";
 import Calendar from "@/views/Calendar.vue";
+import FAQ from "@/views/FAQ.vue";
 
 export default {
   name: "app",
@@ -28,7 +30,8 @@ export default {
     AppAbout: About,
     AppSpeakers: Speakers,
     AppPartners: Partners,
-    AppCalendar: Calendar
+    AppCalendar: Calendar,
+    AppFAQ: FAQ
   }
 };
 </script>
