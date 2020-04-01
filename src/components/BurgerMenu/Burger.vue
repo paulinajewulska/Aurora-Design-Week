@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="burger"
-    :class="{ active: isBurgerActive }"
-    @click.prevent="toggle"
-  >
+  <div class="burger" :class="{ active: isBurgerActive }" @click.prevent="toggle">
     <button type="button" class="burger-button">
       <span class="burger-button__bar burger-button__bar--top"></span>
       <span class="burger-button__bar burger-button__bar--bottom"></span>
@@ -38,9 +34,9 @@ $space-bar-fullhd: 0.55rem;
 .burger-button {
   @include set-property-and-value(
     top,
-    $padding-tablet,
-    $padding-mobile,
-    $padding-fullhd
+    $padding-tablet + $space-bar-tablet,
+    $padding-mobile + $space-bar-mobile,
+    $padding-fullhd + $space-bar-fullhd
   );
   @include set-property-and-value(
     right,
@@ -49,10 +45,9 @@ $space-bar-fullhd: 0.55rem;
     $padding-fullhd
   );
   @include set-property-and-value(width, 4rem, 3rem, 4.5rem);
+  @include set-property-and-value(min-height, 4rem, 3rem, 4.5rem);
   position: fixed;
   display: block;
-  width: fit-content;
-  height: fit-content;
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   border: 0;
   border-radius: 0;
