@@ -126,6 +126,15 @@ export default new Vuex.Store({
         answer:
           "If you can’t make those dates, or can’t get the time off work, keep an eye on this site. We’re constantly updating our schedule with new Masterclasses, all over the world. So chances are, there’ll be another Masterclass popping up near you soon."
       }
+    ],
+    menu: [
+      "About",
+      "Calendar",
+      "Speakers",
+      "News",
+      "Partners",
+      "FAQ",
+      "Contact"
     ]
   },
   getters: {

@@ -4,8 +4,12 @@
       <div v-if="isPanelOpen" class="sidebar__panel">
         <nav>
           <ul class="sidebar__menu">
-            <li v-for="item in menu" :key="item.id">
-              <a href="#" class="sidebar__menu__item">{{ item }}</a>
+            <li
+              v-for="item in this.$store.state.menu"
+              :key="item.id"
+              class="sidebar__menu__item"
+            >
+              <router-link :to="item">{{ item }}</router-link>
             </li>
           </ul>
         </nav>
@@ -17,19 +21,6 @@
 import { store, mutations } from "../../store/index.js";
 
 export default {
-  data: function() {
-    return {
-      menu: [
-        "About",
-        "Calendar",
-        "Speakers",
-        "News",
-        "Partners",
-        "FAQ",
-        "Contact"
-      ]
-    };
-  },
   methods: {
     closeSidebarPanel: mutations.toggleNav
   },
