@@ -42,14 +42,26 @@
       class="landing-page__social-media__list is-hidden-touch"
       v-parallax="0.08"
     >
-      <li class="landing-page__social-media__list-item">
+      <li
+        class="landing-page__social-media__list-item"
+        @mouseover="vm.$store.state.cursorHover = true"
+        @mouseleave="vm.$store.state.cursorHover = false"
+      >
         <a href="https://facebook.com" target="_blank">Facebook</a>
       </li>
-      <li class="landing-page__social-media__list-item">
+      <li
+        class="landing-page__social-media__list-item"
+        @mouseover="vm.$store.state.cursorHover = true"
+        @mouseleave="vm.$store.state.cursorHover = false"
+      >
         <a href="https://twitter.com" target="_blank">Twitter</a>
       </li>
 
-      <li class="landing-page__social-media__list-item">
+      <li
+        class="landing-page__social-media__list-item"
+        @mouseover="vm.$store.state.cursorHover = true"
+        @mouseleave="vm.$store.state.cursorHover = false"
+      >
         <a href="https://instagram.com" target="_blank">Instagram</a>
       </li>
     </ul>
@@ -62,13 +74,20 @@
 <script>
 import VueDisplacementSlideshow from "vue-displacement-slideshow";
 import { gsap } from "gsap";
+import { mapMutations } from "vuex";
 
 export default {
   name: "LandingPage",
+  data: function() {
+    return {
+      vm: this
+    };
+  },
   components: {
     VueDisplacementSlideshow
   },
   computed: {
+    ...mapMutations(["setCursorHover"]),
     images() {
       return [
         require("../assets/LandingPage/hands.jpg"),
@@ -225,8 +244,9 @@ export default {
   &__social-media {
     &__list {
       position: absolute;
-      right: 6rem;
+      right: 5.5rem;
       bottom: 5%;
+      z-index: 999;
       display: flex;
       transform: rotate(-180deg);
       writing-mode: vertical-rl;
@@ -236,7 +256,7 @@ export default {
       }
     }
     &__list-item {
-      padding: 0.5rem 0;
+      padding: 0.5rem;
       font-size: 0.7em;
       &:first-of-type {
         padding-top: 0;

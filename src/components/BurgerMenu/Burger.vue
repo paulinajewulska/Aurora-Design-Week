@@ -1,5 +1,11 @@
 <template>
-  <div class="burger" :class="{ active: isBurgerActive }" @click.prevent="toggle">
+  <div
+    class="burger"
+    :class="{ active: isBurgerActive }"
+    @click.prevent="toggle"
+    @mouseover="vm.$store.state.cursorHover = true"
+    @mouseleave="vm.$store.state.cursorHover = false"
+  >
     <button type="button" class="burger-button">
       <span class="burger-button__bar burger-button__bar--top"></span>
       <span class="burger-button__bar burger-button__bar--bottom"></span>
@@ -9,9 +15,16 @@
 
 <script>
 import { store, mutations } from "../../store/index.js";
+import { mapMutations } from "vuex";
 
 export default {
+  data: function() {
+    return {
+      vm: this
+    };
+  },
   computed: {
+    ...mapMutations(["setCursorHover"]),
     isBurgerActive() {
       return store.isNavOpen;
     }
@@ -52,7 +65,7 @@ $space-bar-fullhd: 0.55rem;
   border: 0;
   border-radius: 0;
   background-color: transparent;
-  z-index: 99;
+  z-index: 99999;
   pointer-events: all;
 
   &__bar {

@@ -14,3 +14,10 @@ section {
     padding: $padding-fullhd / 2 $padding-mobile;
   }
 }
+
+a {
+  color: $light-gray;
+  &:hover {
+    color: $red;
+  }
+}

@@ -8,6 +8,8 @@
               v-for="item in this.$store.state.menu"
               :key="item.id"
               class="sidebar__menu__item"
+              @mouseover="vm.$store.state.cursorHover = true"
+              @mouseleave="vm.$store.state.cursorHover = false"
             >
               <router-link :to="item">{{ item }}</router-link>
             </li>
@@ -19,12 +21,19 @@
 </template>
 <script>
 import { store, mutations } from "../../store/index.js";
+import { mapMutations } from "vuex";
 
 export default {
+  data: function() {
+    return {
+      vm: this
+    };
+  },
   methods: {
     closeSidebarPanel: mutations.toggleNav
   },
   computed: {
+    ...mapMutations(["setCursorHover"]),
     isPanelOpen() {
       return store.isNavOpen;
     }
@@ -57,7 +66,7 @@ export default {
     height: 100vh;
     background-color: $black;
     text-align: center;
-    z-index: 9;
+    z-index: 9999;
   }
   &__menu {
     display: flex;

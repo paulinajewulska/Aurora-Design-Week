@@ -13,6 +13,7 @@ Vue.use(VueParallaxJs, options);
 
 export default new Vuex.Store({
   state: {
+    cursorHover: false,
     months: [
       {
         name: "June",
