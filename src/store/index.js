@@ -11,6 +11,15 @@ const options = {
 import VueParallaxJs from "vue-parallax-js";
 Vue.use(VueParallaxJs, options);
 
+const WebFont = require("webfontloader");
+
+WebFont.load({
+  custom: {
+    families: ["Arimo"],
+    urls: ["../sass/base/_fonts.scss"]
+  }
+});
+
 export default new Vuex.Store({
   state: {
     cursorHover: false,

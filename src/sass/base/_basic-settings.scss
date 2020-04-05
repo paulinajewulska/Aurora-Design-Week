@@ -3,6 +3,13 @@ body {
   font-family: "Arimo";
   color: $black !important;
   // cursor: none;
+  font-family: Arial, Helvetica, sans-serif;   /* Defines the fallback font */
+}
+
+/* Switch to the custom font when it's loaded */
+.wf-active body
+{
+   font-family: 'Arimo';
 }
 
 section {
