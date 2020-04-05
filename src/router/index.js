@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import LandingPage from "@/views/LandingPage.vue";
+import OpeningPage from "@/views/OpeningPage.vue";
 import About from "@/views/About.vue";
 import Calendar from "@/views/Calendar.vue";
 import Speakers from "@/views/Speakers.vue";
@@ -10,7 +10,7 @@ import FAQ from "@/views/FAQ.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", component: LandingPage },
+  { path: "/", component: OpeningPage },
   { path: "/about", component: About },
   { path: "/calendar", component: Calendar },
   { path: "/speakers", component: Speakers },
