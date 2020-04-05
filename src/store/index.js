@@ -20,6 +20,10 @@ WebFont.load({
   }
 });
 
+import { VLazyImagePlugin } from "v-lazy-image";
+
+Vue.use(VLazyImagePlugin);
+
 export default new Vuex.Store({
   state: {
     cursorHover: false,

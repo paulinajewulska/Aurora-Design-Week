@@ -5,15 +5,12 @@
       Thanks everyone partners for helping make Aurora Design Week happen!
     </p>
     <ul class="partners__list">
-      <li
-        v-for="partner in partnerLogoSrcPath"
-        :key="partner.name"
-        v-parallax="0.2"
-      >
-        <img
+      <li v-for="partner in partnerLogoSrcPath" :key="partner.name">
+        <v-lazy-image
           :src="
             require(`@/assets/partners/${partner.name}.${partner.fileExtension}`)
           "
+          :alt="partner.name"
         />
       </li>
     </ul>
@@ -22,6 +19,7 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
+
 export default {
   name: "partners",
   data: function() {

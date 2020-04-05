@@ -10,9 +10,9 @@
         speakers, students and professionals can compare their work, design
         processes, sources of inspiration and methodologies.
       </p>
-      <img
+      <v-lazy-image
         class="about__image"
-        src="../assets/img.png"
+        :src="require('../assets/img.png')"
         alt="ADW"
         v-parallax="0.2"
       />
