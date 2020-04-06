@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" @mouseover="vm.$store.state.isCursorRed = true">
     <transition name="slide">
       <div v-if="isPanelOpen" class="sidebar__panel">
         <nav>
@@ -33,7 +33,7 @@ export default {
     closeSidebarPanel: mutations.toggleNav
   },
   computed: {
-    ...mapMutations(["setCursorHover"]),
+    ...mapMutations(["setCursorHover", "isCursorRed"]),
     isPanelOpen() {
       return store.isNavOpen;
     }

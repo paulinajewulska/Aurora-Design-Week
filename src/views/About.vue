@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section class="about" @mouseenter="vm.$store.state.isCursorRed = false">
     <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
     <div class="about__wrapper">
       <p class="about__paragraph" v-parallax="0.15">
@@ -42,10 +42,15 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
+import { mapMutations } from "vuex";
+
 export default {
   name: "About",
   data: function() {
-    return { name: "About" };
+    return { name: "About", vm: this };
+  },
+  computed: {
+    ...mapMutations(["setCursorHover", "isCursorRed"])
   },
   components: {
     AppSubtitle: Subtitle

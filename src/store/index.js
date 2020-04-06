@@ -27,6 +27,7 @@ Vue.use(VLazyImagePlugin);
 export default new Vuex.Store({
   state: {
     cursorHover: false,
+    isCursorRed: true,
     months: [
       {
         name: "June",

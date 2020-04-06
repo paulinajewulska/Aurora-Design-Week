@@ -1,5 +1,5 @@
 <template>
-  <section class="partners">
+  <section class="partners" @mouseover="vm.$store.state.isCursorRed = false">
     <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
     <p class="partners__paragraph" v-parallax="0.3">
       Thanks everyone partners for helping make Aurora Design Week happen!
@@ -19,6 +19,7 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
+import { mapMutations } from "vuex";
 
 export default {
   name: "partners",
@@ -35,8 +36,12 @@ export default {
         { name: "Tibbaa", fileExtension: "png" },
         { name: "University of Antwerp", fileExtension: "png" },
         { name: "Vige", fileExtension: "png" }
-      ]
+      ],
+      vm: this
     };
+  },
+  computed: {
+    ...mapMutations(["isCursorRed"])
   },
   components: {
     AppSubtitle: Subtitle

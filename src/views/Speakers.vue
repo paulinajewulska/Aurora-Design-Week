@@ -1,5 +1,5 @@
 <template>
-  <section class="speakers">
+  <section class="speakers" @mouseover="vm.$store.state.isCursorRed = false">
     <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
     <ul class="speakers__list">
       <li
@@ -7,6 +7,8 @@
         :key="speaker.name"
         class="speakers__list-item"
         v-parallax="0.2"
+        @mouseover="vm.$store.state.cursorHover = true"
+        @mouseleave="vm.$store.state.cursorHover = false"
       >
         <div class="speakers__list-item__name">{{ speaker.name }}</div>
         <div class="speakers__list-item__surname">{{ speaker.surname }}</div>
@@ -18,6 +20,8 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
+import { mapMutations } from "vuex";
+
 export default {
   name: "Speakers",
   data: function() {
@@ -31,10 +35,13 @@ export default {
         { name: "Alex", surname: "Cameron", country: "JP" },
         { name: "Japanese", surname: "breakfast", country: "ES" },
         { name: "Smino", surname: "", country: "AU" },
-        { name: "Last", surname: "entanglements", country: "US" },
-        { name: "Kweku", surname: "Collins", country: "JP" }
-      ]
+        { name: "Last", surname: "entanglements", country: "US" }
+      ],
+      vm: this
     };
+  },
+  computed: {
+    ...mapMutations(["setCursorHover", "isCursorRed"])
   },
   components: {
     AppSubtitle: Subtitle
@@ -57,6 +64,7 @@ $circle-size-desktop: 3.2rem;
       align-items: center;
       font-size: 1.5rem;
       text-transform: uppercase;
+      width: fit-content;
       @media only screen and (min-width: $tablet) {
         font-size: 3.5rem;
       }

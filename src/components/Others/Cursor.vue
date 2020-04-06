@@ -3,7 +3,8 @@
     :class="[
       'cursor',
       { cursor__hover: cursorHover },
-      { cursor__hide: hideCursor }
+      { cursor__hide: hideCursor },
+      { cursor__red: isCursorRed }
     ]"
   >
     <div class="cursor__point" ref="point" :style="cursorPoint"></div>
@@ -23,7 +24,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["cursorHover"]),
+    ...mapState(["cursorHover", "isCursorRed"]),
     cursorPoint() {
       return `transform: translateX(${this.xPosition - 13}px) translateY(${this
         .yPosition - 13}px) translateZ(0) translate3d(0, 0, 0);`;
@@ -58,6 +59,12 @@ export default {
     }
   }
 
+  &__red {
+    & div {
+      background-color: $red;
+    }
+  }
+
   &__hide {
     width: 0;
     height: 0;
@@ -75,7 +82,7 @@ export default {
     padding: 0.5rem;
     transition: width 0.2s ease, height 0.2s ease;
     background-color: $black;
-    z-index: 9999;
+    z-index: 99999;
     pointer-events: none;
     user-select: none;
     backface-visibility: hidden;

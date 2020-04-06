@@ -1,5 +1,5 @@
 <template>
-  <section class="landing-page">
+  <section class="landing-page" @mouseover="vm.$store.state.isCursorRed = true">
     <vue-displacement-slideshow
       class="landing-page__slideshow"
       :images="images"
@@ -87,7 +87,7 @@ export default {
     VueDisplacementSlideshow
   },
   computed: {
-    ...mapMutations(["setCursorHover"]),
+    ...mapMutations(["setCursorHover", "isCursorRed"]),
     images() {
       return [
         require("../assets/LandingPage/hands.jpg"),

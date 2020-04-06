@@ -1,5 +1,5 @@
 <template>
-  <section class="calendar">
+  <section class="calendar" @mouseover="vm.$store.state.isCursorRed = false">
     <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
     <div
       class="calendar__months"
@@ -17,15 +17,16 @@
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
 import CalendarMonth from "../components/Calendar/CalendarMonth.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Partners",
   data: function() {
-    return { name: "Upcoming shows" };
+    return { name: "Upcoming shows", vm: this };
   },
   computed: {
-    ...mapGetters(["getMonthNames"])
+    ...mapGetters(["getMonthNames"]),
+    ...mapMutations(["isCursorRed"])
   },
   components: {
     AppSubtitle: Subtitle,

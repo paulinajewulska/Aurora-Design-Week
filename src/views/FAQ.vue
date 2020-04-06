@@ -1,5 +1,5 @@
 <template>
-  <section class="FAQ">
+  <section class="FAQ" @mouseover="vm.$store.state.isCursorRed = false">
     <app-subtitle :subtitle="this.name"></app-subtitle>
     <div class="FAQ__questions-wrapper">
       <app-f-a-q-question
@@ -15,17 +15,18 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
-import { mapState } from "vuex";
 import FAQQuestion from "../components/FAQ/FAQQuestion.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "FAQ",
   data: function() {
     return {
-      name: "Got some question?"
+      name: "Got some question?",
+      vm: this
     };
   },
-  computed: { ...mapState(["questions"]) },
+  computed: { ...mapState(["questions"]), ...mapMutations(["isCursorRed"]) },
   components: {
     AppSubtitle: Subtitle,
     AppFAQQuestion: FAQQuestion
