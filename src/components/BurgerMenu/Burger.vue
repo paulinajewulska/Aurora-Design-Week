@@ -47,9 +47,9 @@ $space-bar-fullhd: 0.55rem;
 .burger-button {
   @include set-property-and-value(
     top,
-    $padding-tablet + $space-bar-tablet,
-    $padding-mobile + $space-bar-mobile,
-    $padding-fullhd + $space-bar-fullhd
+    $padding-tablet - $space-bar-tablet,
+    $padding-mobile - $space-bar-mobile,
+    $padding-fullhd - $space-bar-fullhd
   );
   @include set-property-and-value(
     right,
@@ -65,8 +65,9 @@ $space-bar-fullhd: 0.55rem;
   border: 0;
   border-radius: 0;
   background-color: transparent;
-  z-index: 99999;
+  z-index: 9999999;
   pointer-events: all;
+  cursor: pointer;
 
   &__bar {
     position: absolute;

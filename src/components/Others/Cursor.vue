@@ -4,7 +4,8 @@
       'cursor',
       { cursor__hover: cursorHover },
       { cursor__hide: hideCursor },
-      { cursor__red: isCursorRed }
+      { cursor__red: isCursorRed },
+      'is-hidden-touch'
     ]"
   >
     <div class="cursor__point" ref="point" :style="cursorPoint"></div>
@@ -20,20 +21,23 @@ export default {
     return {
       xPosition: 0,
       yPosition: 0,
-      hideCursor: true
+      hideCursor: true,
+      centerPosition: 0
     };
   },
   computed: {
     ...mapState(["cursorHover", "isCursorRed"]),
     cursorPoint() {
-      return `transform: translateX(${this.xPosition - 13}px) translateY(${this
-        .yPosition - 13}px) translateZ(0) translate3d(0, 0, 0);`;
+      return `transform: translateX(${this.xPosition -
+        this.centerPosition}px) translateY(${this.yPosition -
+        this.centerPosition}px) translateZ(0) translate3d(0, 0, 0);`;
     }
   },
   methods: {
     moveCursor(e) {
       this.xPosition = e.clientX;
       this.yPosition = e.clientY;
+      this.centerPosition = this.$refs.point.clientHeight / 2;
     }
   },
   mounted() {
@@ -55,7 +59,7 @@ export default {
     & div {
       width: 3.5rem;
       height: 3.5rem;
-      transition: width 0.2s ease, height 0.2s ease;
+      transition: width 0.25s ease, height 0.25s ease;
     }
   }
 
@@ -80,7 +84,7 @@ export default {
     height: 0.15rem;
     border-radius: 100%;
     padding: 0.5rem;
-    transition: width 0.2s ease, height 0.2s ease;
+    transition: width 0.25s ease, height 0.25s ease;
     background-color: $black;
     z-index: 99999;
     pointer-events: none;

@@ -1,9 +1,8 @@
 body {
   width: 100%;
-  font-family: "Arimo";
-  color: $black !important;
-  // cursor: none;
   font-family: Arial, Helvetica, sans-serif;   /* Defines the fallback font */
+  color: $black !important;
+  cursor: none;
 }
 
 /* Switch to the custom font when it's loaded */
@@ -24,7 +23,5 @@ section {
 
 a {
   color: $light-gray;
-  &:hover {
-    color: $red;
-  }
+  cursor: none;
 }

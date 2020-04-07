@@ -90,15 +90,14 @@ export default {
       }
     }
     &__item {
+      position: relative;
       border-bottom: 1px solid $light-gray;
       color: $light-gray;
       font-size: 2.5rem;
       text-align: left;
       text-transform: uppercase;
-      &:hover {
-        border-bottom: 1px solid $red;
-        color: $red;
-      }
+      cursor: pointer;
+      z-index: 999999;
     }
   }
 }

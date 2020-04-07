@@ -41,6 +41,7 @@
     <ul
       class="landing-page__social-media__list is-hidden-touch"
       v-parallax="0.08"
+      v-if="!isMenuOpen"
     >
       <li
         class="landing-page__social-media__list-item"
@@ -75,6 +76,7 @@
 import VueDisplacementSlideshow from "vue-displacement-slideshow";
 import { gsap } from "gsap";
 import { mapMutations } from "vuex";
+import { store } from "../store/index.js";
 
 export default {
   name: "LandingPage",
@@ -95,6 +97,9 @@ export default {
         require("../assets/LandingPage/woman.png"),
         require("../assets/LandingPage/stairs.jpg")
       ];
+    },
+    isMenuOpen() {
+      return store.isNavOpen;
     }
   },
   methods: {
@@ -246,9 +251,9 @@ export default {
       position: absolute;
       right: 5.5rem;
       bottom: 5%;
-      z-index: 999;
       display: flex;
       transform: rotate(-180deg);
+      z-index: 99999;
       writing-mode: vertical-rl;
       letter-spacing: 0.05rem;
       @media only screen and (min-width: $desktop) {
@@ -258,6 +263,7 @@ export default {
     &__list-item {
       padding: 0.5rem;
       font-size: 0.7em;
+      cursor: pointer;
       &:first-of-type {
         padding-top: 0;
       }
