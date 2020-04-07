@@ -2,13 +2,19 @@
 
 ## Build Setup
 
-### dependencies:
-npm install # Or yarn install
+### Dependencies
+npm install or yarn install
 
-### spin up server with hot reload (npm run / yarn)
+### Spin up server with reload (npm run / yarn)
 npm run serve
 
-### build for production
+### Build for production
 npm run build
 
-## Made with [vue-cli](https://cli.vuejs.org/).
+### Made with [vue-cli](https://cli.vuejs.org/).
+
+## Used photos:
+* Landing Page:
+    * [Metro](https://unsplash.com/photos/4XIUmOxP2xQ)
+    * [Statue](https://unsplash.com/photos/iTO_Hi-i7Lk)
+    * [Dragon](https://unsplash.com/photos/qKeNO57OxWo)
