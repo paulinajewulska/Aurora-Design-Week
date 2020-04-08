@@ -1,8 +1,8 @@
 <template>
   <section class="about" @mouseenter="vm.$store.state.isCursorRed = false">
-    <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
+    <app-subtitle :subtitle="this.name" v-parallax="0.05"></app-subtitle>
     <div class="about__wrapper">
-      <p class="about__paragraph" v-parallax="0.15">
+      <p class="about__paragraph" v-parallax="0.05">
         ADW 2019 is the sixth edition of the thought-provoking conference format
         organized by St Lucas School of Arts Antwerp. The biennial event offers
         a platform for the compelling dialogue between art, design and society,
@@ -12,11 +12,11 @@
       </p>
       <v-lazy-image
         class="about__image"
-        :src="require('../assets/img.png')"
-        alt="ADW"
-        v-parallax="0.2"
+        :src="require('../assets/annie-spratt-C45XqxDRdbU-unsplash.jpg')"
+        alt="People walking on the street"
+        v-parallax="0.1"
       />
-      <p class="about__paragraph" v-parallax="0.15">
+      <p class="about__paragraph" v-parallax="0.05">
         During Integrated 2015, cultural philosopher Lieven De Cauter told the
         public to go and take a hike with his closing act entitled ‘Fuck
         Format’, a clenched quote for which he didn’t even require 140
@@ -35,6 +35,24 @@
         between market and state, and it does so under various guises (mental,
         physical and virtual), and that’s why it also often finds itself in a
         grey zone between legality and illegality.
+      </p>
+      <p
+        v-if="$route.path === '/About'"
+        class="about__paragraph"
+        v-parallax="0.05"
+      >
+        Because whoever launches a citizen initiative or claims civil rights
+        doesn’t yet know whether they will be agreed to or not. Will an
+        authority accept and regulate them, or will it work against these
+        initiatives, sabotage them or even criminalize them? To be clear: civil
+        actions are not simply criminal, but they precede the distinction
+        between legality and illegality. That’s why it also always involves
+        risky behaviour. The civilian who sticks his neck out, demands something
+        new or sets up an organization puts himself on the line and runs the
+        risk of never being recognized and even of never achieving his social
+        position or losing it for good. It thus requires courage, and the social
+        media also play a crucial role in this everyday struggle, for better or
+        worse. Because online sharing is often synonymous with online lynching.
       </p>
     </div>
   </section>

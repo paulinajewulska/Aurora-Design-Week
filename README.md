@@ -18,3 +18,5 @@ npm run build
     * [Metro](https://unsplash.com/photos/4XIUmOxP2xQ)
     * [Statue](https://unsplash.com/photos/iTO_Hi-i7Lk)
     * [Dragon](https://unsplash.com/photos/qKeNO57OxWo)
+* About section:
+    * [People walking on the street](https://unsplash.com/photos/C45XqxDRdbU)
