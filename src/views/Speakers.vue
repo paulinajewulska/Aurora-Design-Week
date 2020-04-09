@@ -15,8 +15,9 @@
         :key="speaker.name"
         class="speakers__list-item"
         v-parallax="0.05"
-        @mouseover="vm.$store.state.cursorHover = true"
-        @mouseleave="vm.$store.state.cursorHover = false"
+        @mousemove="vm.$store.state.isCursorRed = true"
+        @mouseleave="vm.$store.state.isCursorRed = false"
+        @mouseover="vm.imageSrcPath = speaker.image"
       >
         <div class="speakers__list-item__name">{{ speaker.name }}</div>
         <div class="speakers__list-item__surname">{{ speaker.surname }}</div>
@@ -24,7 +25,7 @@
       </li>
     </ul>
     <img
-      :src="require('../assets/annie-spratt-C45XqxDRdbU-unsplash.jpg')"
+      :src="imageSrcPath"
       ref="image"
       :class="[
         'speakers__image',
@@ -54,40 +55,48 @@ export default {
         {
           name: "Nnamdi",
           surname: "Obgonnaya",
-          country: "AU"
+          country: "AU",
+          image: require("../assets/Speakers/autumn-goodman-vTL_qy03D1I-unsplash.jpg")
         },
         {
           name: "Kweku",
           surname: "Collins",
-          country: "BE"
+          country: "BE",
+          image: require("../assets/Speakers/christian-buehner-DItYlc26zVI-unsplash.jpg")
         },
         {
           name: "Kelly",
           surname: "Owens",
-          country: "AU"
+          country: "AU",
+          image: require("../assets/Speakers/allef-vinicius-XRLjA9Qq65Y-unsplash.jpg")
         },
         {
           name: "Alex",
           surname: "Cameron",
-          country: "JP"
+          country: "JP",
+          image: require("../assets/Speakers/elizeu-dias-2EGNqazbAMk-unsplash.jpg")
         },
         {
           name: "Japanese",
           surname: "breakfast",
-          country: "ES"
+          country: "ES",
+          image: require("../assets/Speakers/christian-ferrer-4JpyAldl-KI-unsplash.jpg")
         },
         {
           name: "Smino",
           surname: "Williams",
-          country: "AU"
+          country: "AU",
+          image: require("../assets/Speakers/ayo-ogunseinde-sibVwORYqs0-unsplash.jpg")
         },
         {
           name: "Last",
           surname: "entanglement",
-          country: "US"
+          country: "US",
+          image: require("../assets/Speakers/lucas-quintana-5UeEbA8LsEA-unsplash.jpg")
         }
       ],
-      vm: this
+      vm: this,
+      imagePath: ""
     };
   },
   computed: {
@@ -98,6 +107,14 @@ export default {
       },
       set: function(value) {
         this.isCursorOnList = value;
+      }
+    },
+    imageSrcPath: {
+      get: function() {
+        return this.imagePath;
+      },
+      set: function(value) {
+        this.imagePath = value;
       }
     },
     imagePosition() {
@@ -122,6 +139,7 @@ export default {
       this.yPhotoCenterPosition = y - this.imageWidthCenter;
       image.style.top = `${x - this.imageHeightCenter}px`;
       image.style.left = `${y - this.imageWidthCenter}px`;
+      this.imageSrcPath = this.speakers[0].image;
     }
   },
   components: {
@@ -148,7 +166,10 @@ $circle-size-desktop: 3.2rem;
       width: fit-content;
       font-size: 1.5rem;
       text-transform: uppercase;
-      z-index: 999999;
+      z-index: 99;
+      &:hover {
+        color: $red;
+      }
       @media only screen and (min-width: $tablet) {
         font-size: 3.5rem;
       }
@@ -180,7 +201,8 @@ $circle-size-desktop: 3.2rem;
   &__image {
     position: absolute;
     max-height: 15rem;
-    z-index: 9999;
+    transition: opacity 0.25s ease-in-out;
+    z-index: 9;
   }
   &__image--invisible {
     opacity: 0;
