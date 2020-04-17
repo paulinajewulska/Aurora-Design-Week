@@ -1,5 +1,8 @@
 # Aurora Design Week
 
+Live: [link](https://paulinajewulska.github.io/Aurora-Design-Week/) ✨✨
+(Preferred web browsers: Chrome & Opera)
+
 ## Build Setup
 
 ### Dependencies
