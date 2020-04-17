@@ -4,7 +4,7 @@
     @mouseover="vm.$store.state.isCursorRed = false"
     @mouseenter="setInitialImagePosition"
   >
-    <app-subtitle :subtitle="this.name" v-parallax="0.05"></app-subtitle>
+    <app-subtitle :subtitle="this.name"></app-subtitle>
     <ul
       class="speakers__list"
       @mousemove="moveImage"
@@ -14,7 +14,6 @@
         v-for="speaker in speakers"
         :key="speaker.name"
         class="speakers__list-item"
-        v-parallax="0.05"
         @mousemove="vm.$store.state.isCursorRed = true"
         @mouseleave="vm.$store.state.isCursorRed = false"
         @mouseover="vm.imageSrcPath = speaker.image"

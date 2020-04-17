@@ -1,8 +1,8 @@
 <template>
   <section class="about" @mouseenter="vm.$store.state.isCursorRed = false">
-    <app-subtitle :subtitle="this.name" v-parallax="0.05"></app-subtitle>
+    <app-subtitle :subtitle="this.name"></app-subtitle>
     <div class="about__wrapper">
-      <p class="about__paragraph" v-parallax="0.05">
+      <p class="about__paragraph">
         ADW 2019 is the sixth edition of the thought-provoking conference format
         organized by St Lucas School of Arts Antwerp. The biennial event offers
         a platform for the compelling dialogue between art, design and society,
@@ -14,9 +14,8 @@
         class="about__image"
         :src="require('../assets/annie-spratt-C45XqxDRdbU-unsplash.jpg')"
         alt="People walking on the street"
-        v-parallax="0.1"
       />
-      <p class="about__paragraph" v-parallax="0.05">
+      <p class="about__paragraph">
         During Integrated 2015, cultural philosopher Lieven De Cauter told the
         public to go and take a hike with his closing act entitled ‘Fuck
         Format’, a clenched quote for which he didn’t even require 140
@@ -36,11 +35,7 @@
         physical and virtual), and that’s why it also often finds itself in a
         grey zone between legality and illegality.
       </p>
-      <p
-        v-if="$route.path === '/About'"
-        class="about__paragraph"
-        v-parallax="0.05"
-      >
+      <p v-if="$route.path === '/About'" class="about__paragraph">
         Because whoever launches a citizen initiative or claims civil rights
         doesn’t yet know whether they will be agreed to or not. Will an
         authority accept and regulate them, or will it work against these

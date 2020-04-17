@@ -1,15 +1,12 @@
 <template>
   <section class="calendar" @mouseover="vm.$store.state.isCursorRed = false">
-    <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
+    <app-subtitle :subtitle="this.name"></app-subtitle>
     <div
       class="calendar__months"
       v-for="month in getMonthNames"
       :key="month.id"
     >
-      <app-calendar-month
-        :monthName="month"
-        v-parallax="0.2"
-      ></app-calendar-month>
+      <app-calendar-month :monthName="month"></app-calendar-month>
     </div>
   </section>
 </template>

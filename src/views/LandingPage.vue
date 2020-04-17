@@ -11,7 +11,7 @@
       ease="expo.out"
       ref="slideshow"
     ></vue-displacement-slideshow>
-    <h1 class="landing-page__title columns is-mobile" v-parallax="0.1">
+    <h1 class="landing-page__title columns is-mobile">
       <div class="landing-page__title__word-wrapper">
         <span class="column landing-page__title__word">Aurora</span>
       </div>
@@ -31,16 +31,14 @@
         <span class="column landing-page__title__word">2019</span>
       </div>
     </h1>
-    <p class="column landing-page__date" v-parallax="0.1">JUNE 13 - 20</p>
+    <p class="column landing-page__date">JUNE 13 - 20</p>
     <p
       class="column is-3-desktop is-offset-7-desktop is-hidden-touch landing-page__paragraph"
-      v-parallax="0.09"
     >
       7 days of free for all talks, designs, installations & performances.
     </p>
     <ul
       class="landing-page__social-media__list is-hidden-touch"
-      v-parallax="0.08"
       v-if="!isMenuOpen"
     >
       <li

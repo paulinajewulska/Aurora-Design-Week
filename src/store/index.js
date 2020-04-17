@@ -5,14 +5,7 @@ import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 Vue.use(Buefy);
 
-const options = {
-  minWidth: 600 /* minumum window width for parallax to take effect */
-};
-import VueParallaxJs from "vue-parallax-js";
-Vue.use(VueParallaxJs, options);
-
 const WebFont = require("webfontloader");
-
 WebFont.load({
   custom: {
     families: ["Arimo"],

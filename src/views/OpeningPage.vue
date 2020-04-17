@@ -3,6 +3,7 @@
     <app-landing-page></app-landing-page>
     <app-about></app-about>
     <app-speakers></app-speakers>
+    <app-contact></app-contact>
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import LandingPage from "@/views/LandingPage.vue";
 import About from "@/views/About.vue";
 import Speakers from "@/views/Speakers.vue";
+import Contact from "@/views/Contact.vue";
 
 export default {
   name: "openingPage",
   components: {
     AppLandingPage: LandingPage,
     AppAbout: About,
-    AppSpeakers: Speakers
+    AppSpeakers: Speakers,
+    AppContact: Contact
   }
 };
 </script>

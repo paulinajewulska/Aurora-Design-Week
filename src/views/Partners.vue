@@ -1,7 +1,7 @@
 <template>
   <section class="partners" @mouseover="vm.$store.state.isCursorRed = false">
-    <app-subtitle :subtitle="this.name" v-parallax="0.1"></app-subtitle>
-    <p class="partners__paragraph" v-parallax="0.3">
+    <app-subtitle :subtitle="this.name"></app-subtitle>
+    <p class="partners__paragraph">
       Thanks everyone partners for helping make Aurora Design Week happen!
     </p>
     <ul class="partners__list">
