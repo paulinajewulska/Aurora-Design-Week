@@ -6,6 +6,7 @@ import Calendar from "@/views/Calendar.vue";
 import Speakers from "@/views/Speakers.vue";
 import Partners from "@/views/Partners.vue";
 import FAQ from "@/views/FAQ.vue";
+import Contact from "@/views/Contact.vue";
 import UnknownRoute from "@/views/404.vue";
 
 Vue.use(VueRouter);
@@ -17,6 +18,7 @@ const routes = [
   { path: "/speakers", component: Speakers },
   { path: "/partners", component: Partners },
   { path: "/faq", component: FAQ },
+  { path: "/contact", component: Contact },
   { path: "*", component: UnknownRoute }
 ];
 
