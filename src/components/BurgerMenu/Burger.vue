@@ -47,20 +47,16 @@ $space-bar-fullhd: 0.55rem;
 .burger-button {
   @include set-property-and-value(
     top,
-    $padding-tablet - $space-bar-tablet,
-    $padding-mobile - $space-bar-mobile,
-    $padding-fullhd - $space-bar-fullhd
+    calc(10vh - 2rem),
+    calc(8vh - 1.5rem),
+    calc(12vh - 2.25rem)
   );
-  @include set-property-and-value(
-    right,
-    $padding-tablet,
-    $padding-mobile,
-    $padding-fullhd
-  );
+  @include set-property-and-value(right, $padding-tablet, 5vh, $padding-tablet);
   @include set-property-and-value(width, 4rem, 3rem, 4.5rem);
   @include set-property-and-value(min-height, 4rem, 3rem, 4.5rem);
   position: fixed;
   display: block;
+  padding: 0;
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   border: 0;
   border-radius: 0;

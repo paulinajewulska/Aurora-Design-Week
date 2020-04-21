@@ -17,13 +17,12 @@
       </div>
       <div class="landing-page__title__word-wrapper">
         <span
-          class="column is-offset-3-touch is-offset-2-desktop landing-page__title__word"
+          class="column is-offset-1-touch is-offset-2-desktop landing-page__title__word"
           >Design</span
         >
       </div>
       <div class="landing-page__title__word-wrapper">
-        <span
-          class="column is-offset-1-touch is-offset-1-desktop landing-page__title__word"
+        <span class="column is-offset-1-desktop landing-page__title__word"
           >Week</span
         >
       </div>
@@ -145,10 +144,11 @@ export default {
 }
 
 .landing-page {
-  z-index: 1;
-  width: 100vw;
+  max-width: 100vw;
   height: 100vh;
+  background-color: $black;
   color: $light-gray;
+  z-index: 1;
   &__slideshow {
     position: absolute;
     top: 0;
@@ -159,20 +159,20 @@ export default {
   }
   &__title {
     position: absolute;
-    top: 15%;
+    top: 9rem;
     display: flex;
     flex-direction: column;
     text-transform: uppercase;
     width: 75%;
-    @media only screen and (min-width: $desktop) {
-      top: 3.5rem;
-    }
     @media only screen and (min-width: $tablet) {
-      top: 5%;
+      top: 15rem;
+    }
+    @media only screen and (min-width: $desktop) {
+      top: 12vh;
     }
 
     &__word-wrapper {
-      margin: 0 initial;
+      margin: 0 0.1rem;
       padding: 0;
       position: relative;
       overflow: hidden;
@@ -202,7 +202,10 @@ export default {
   }
   &__paragraph {
     position: absolute;
-    top: 45%;
+    top: 55%;
+    @media only screen and (min-width: $fullhd) {
+      top: 45%;
+    }
   }
   &__arrow-container {
     position: absolute;
@@ -211,10 +214,11 @@ export default {
     width: 2rem;
     height: 4rem;
     overflow: hidden;
-    @media only screen and (min-width: $desktop) {
-      right: calc(50% - 1rem);
+    @media only screen and (min-width: $tablet) {
+      right: calc(3rem + 0.625rem / 2);
     }
     @media only screen and (min-width: $desktop) {
+      right: calc(50% - 1rem);
       bottom: 3.5rem;
     }
   }
@@ -246,7 +250,7 @@ export default {
   &__social-media {
     &__list {
       position: absolute;
-      right: 5.5rem;
+      right: $margin-tablet;
       bottom: 5%;
       display: flex;
       transform: rotate(-180deg);
@@ -261,9 +265,6 @@ export default {
       padding: 0.5rem;
       font-size: 0.7em;
       cursor: pointer;
-      &:first-of-type {
-        padding-top: 0;
-      }
     }
   }
 }
