@@ -2,7 +2,12 @@
   <div
     class="contact__message column is-12-mobile is-7-tablet is-5-desktop is-5-fullhd"
   >
-    <form method="post" class="contact__form" @submit.prevent="sendQuestion">
+    <form
+      method="post"
+      class="contact__form"
+      @submit.prevent="sendQuestion"
+      novalidate
+    >
       <input
         type="text"
         v-model="questionForm.name"
@@ -20,6 +25,9 @@
         class="contact__form__question"
         placeholder="Question"
       ></textarea>
+      <p v-if="validationError" class="contact__form__error">
+        {{ validationError }}
+      </p>
       <button class="contact__button" type="submit">SEND</button>
     </form>
   </div>
@@ -35,17 +43,55 @@ export default {
       questionForm: {
         name: "",
         email: "",
-        question: ""
+        question: "",
+        error: ""
       }
     };
+  },
+  computed: {
+    validationError: {
+      get: function() {
+        return this.questionForm.error;
+      },
+      set: function(error) {
+        this.questionForm.error = error;
+      }
+    }
   },
   methods: {
     sendQuestion(e) {
       e.preventDefault();
-      const name = this.questionForm.name;
-      const email = this.questionForm.email;
-      const question = this.questionForm.question;
+      const name = this.questionForm.name.trim();
+      const email = this.questionForm.email.trim();
+      const question = this.questionForm.question.trim();
+      this.validationError = "";
+      if (!name) {
+        this.validationError = "Please enter your name";
+        return;
+      }
+      if (!email) {
+        this.validationError = "Please enter your email";
+        return;
+      } else {
+        const val = this.validateEmail(email);
+        if (!val) {
+          this.validationError = "Please enter valid email";
+          return;
+        }
+      }
+
+      if (!question) {
+        this.validationError = "Please enter your question";
+        return;
+      }
       sendQuestion(name, email, question);
+      this.questionForm.name = "";
+      this.questionForm.email = "";
+      this.questionForm.question = "";
+    },
+    validateEmail(email) {
+      const val = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      return val.test(String(email).toLowerCase());
     }
   }
 };
@@ -84,6 +130,12 @@ export default {
     &__question {
       height: 3.5rem;
     }
+    &__error {
+      margin-top: 0.05rem;
+      font-size: 0.75rem;
+      color: $red;
+      letter-spacing: 0.05rem;
+    }
   }
   &__button {
     width: fit-content;
@@ -93,6 +145,7 @@ export default {
     border-bottom: 1px solid $white;
     background-color: $black;
     color: $white;
+    cursor: pointer;
   }
 }
 </style>

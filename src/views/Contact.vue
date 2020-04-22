@@ -66,6 +66,9 @@ export default {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    @media only screen and (min-width: $desktop) {
+      margin-top: 3rem;
+    }
   }
   &__application__paragraph,
   &__message__title {

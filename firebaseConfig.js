@@ -19,10 +19,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-function setApplicant(email, address, phone) {
+function setApplicant(name, email, phone) {
   const applicant = {
+    name,
     email,
-    address,
     phone
   };
 
