@@ -57,7 +57,11 @@ export default {
   flex-direction: column;
   width: 100vw;
   min-height: 100vh;
+  max-height: fit-content;
   background-color: $black;
+  background-image: url("../assets/ricardo-gomez-angel-D9kOnC_1AHw-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
   color: $light-gray;
   &__subtitle {
     color: $light-gray;

@@ -55,43 +55,43 @@ export default {
           name: "Nnamdi",
           surname: "Obgonnaya",
           country: "AU",
-          image: require("../assets/Speakers/autumn-goodman-vTL_qy03D1I-unsplash.jpg")
+          image: require("../assets/Speakers/jard-rusticus-Ib-4pQtdHt0-unsplash-min.jpg")
         },
         {
           name: "Kweku",
           surname: "Collins",
           country: "BE",
-          image: require("../assets/Speakers/christian-buehner-DItYlc26zVI-unsplash.jpg")
+          image: require("../assets/Speakers/brian-lundquist-DwGIBfqLxno-unsplash-min.jpg")
         },
         {
           name: "Kelly",
           surname: "Owens",
           country: "AU",
-          image: require("../assets/Speakers/allef-vinicius-XRLjA9Qq65Y-unsplash.jpg")
+          image: require("../assets/Speakers/andrey-zvyagintsev-3paYH1ewz3s-unsplash-min.jpg")
         },
         {
           name: "Alex",
           surname: "Cameron",
           country: "JP",
-          image: require("../assets/Speakers/elizeu-dias-2EGNqazbAMk-unsplash.jpg")
+          image: require("../assets/Speakers/denis-agati--5Vl9oimYlU-unsplash-min.jpg")
         },
         {
-          name: "Japanese",
+          name: "Korean",
           surname: "breakfast",
           country: "ES",
-          image: require("../assets/Speakers/christian-ferrer-4JpyAldl-KI-unsplash.jpg")
+          image: require("../assets/Speakers/levi-clancy-WE0gt7t4o2k-unsplash-min.jpg")
         },
         {
           name: "Smino",
           surname: "Williams",
           country: "AU",
-          image: require("../assets/Speakers/ayo-ogunseinde-sibVwORYqs0-unsplash.jpg")
+          image: require("../assets/Speakers/thomas-mowe-cG-A0o4zV1w-unsplash-min.jpg")
         },
         {
-          name: "Last",
-          surname: "entanglement",
+          name: "Josiah",
+          surname: "Faulkner",
           country: "US",
-          image: require("../assets/Speakers/lucas-quintana-5UeEbA8LsEA-unsplash.jpg")
+          image: require("../assets/Speakers/fayiz-musthafa-yGqsr6EVrGw-unsplash-min.jpg")
         }
       ],
       vm: this,
@@ -150,8 +150,8 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/main.scss";
 
-$circle-size-mobile: 2.3rem;
-$circle-size-tablet: 3.2rem;
+$circle-size-mobile: 2.1rem;
+$circle-size-tablet: 3rem;
 $circle-size-desktop: 3.2rem;
 
 .speakers {
@@ -163,7 +163,7 @@ $circle-size-desktop: 3.2rem;
       display: flex;
       align-items: center;
       width: fit-content;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       text-transform: uppercase;
       z-index: 99;
       &:hover {
@@ -186,13 +186,13 @@ $circle-size-desktop: 3.2rem;
         align-items: center;
         width: $circle-size-mobile;
         height: $circle-size-mobile;
-        font-size: 1.4rem;
+        font-size: 1.1rem;
         border: 0.15rem solid $black;
         border-radius: 50%;
         @media only screen and (min-width: $tablet) {
           width: $circle-size-tablet;
           height: $circle-size-tablet;
-          font-size: 2rem;
+          font-size: 1.9rem;
         }
       }
     }

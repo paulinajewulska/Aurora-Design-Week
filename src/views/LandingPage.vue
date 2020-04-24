@@ -90,7 +90,7 @@ export default {
     images() {
       return [
         require("../assets/LandingPage/mart-pieterman-4XIUmOxP2xQ-unsplash.jpg"),
-        require("../assets/LandingPage/rafal-wilinski-iTO_Hi-i7Lk-unsplash.jpg"),
+        require("../assets/LandingPage/duangphorn-wiriya-zm438klkxU4-unsplash.jpg"),
         require("../assets/LandingPage/jack-hunter-qKeNO57OxWo-unsplash.jpg")
       ];
     },
