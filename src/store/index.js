@@ -136,13 +136,14 @@ export default new Vuex.Store({
       }
     ],
     menu: [
-      "About",
-      "Calendar",
-      "Speakers",
-      "News",
-      "Partners",
-      "FAQ",
-      "Contact"
+      "home",
+      "about",
+      "calendar",
+      "speakers",
+      "news",
+      "partners",
+      "faq",
+      "contact"
     ]
   },
   getters: {

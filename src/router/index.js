@@ -13,6 +13,7 @@ Vue.use(VueRouter);
 
 const routes = [
   { path: "/", component: OpeningPage },
+  { path: "/home", redirect: "/" },
   { path: "/about", component: About },
   { path: "/calendar", component: Calendar },
   { path: "/speakers", component: Speakers },

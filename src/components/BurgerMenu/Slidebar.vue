@@ -8,6 +8,9 @@
               v-for="item in this.$store.state.menu"
               :key="item.id"
               class="sidebar__menu__item"
+              @click.prevent="
+                toggleBurger(), (vm.$store.state.cursorHover = false)
+              "
               @mouseover="vm.$store.state.cursorHover = true"
               @mouseleave="vm.$store.state.cursorHover = false"
             >
@@ -30,7 +33,10 @@ export default {
     };
   },
   methods: {
-    closeSidebarPanel: mutations.toggleNav
+    closeSidebarPanel: mutations.toggleNav,
+    toggleBurger() {
+      mutations.toggleNav();
+    }
   },
   computed: {
     ...mapMutations(["setCursorHover", "isCursorRed"]),
@@ -45,13 +51,12 @@ export default {
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.3s ease;
+  transition: transform 0.05s ease-in-out;
 }
 
 .slide-enter,
 .slide-leave-to {
-  transform: translateX(100%);
-  transition: all 0.3s ease 0s;
+  transition: all 0.05s ease-in-out 0s;
 }
 
 .sidebar {
@@ -97,7 +102,9 @@ export default {
       text-align: left;
       text-transform: uppercase;
       cursor: pointer;
-      z-index: 999999;
+      & > * {
+        z-index: 999999;
+      }
     }
   }
 }

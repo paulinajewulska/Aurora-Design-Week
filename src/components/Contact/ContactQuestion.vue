@@ -122,7 +122,7 @@ export default {
       margin: 0.25rem 0;
       border: none;
       border-bottom: 1px solid $white;
-      background-color: $black;
+      background-color: transparent;
       color: $white;
       font-size: 0.75rem;
       letter-spacing: 0.05rem;
@@ -143,7 +143,7 @@ export default {
     padding: 0;
     border: none;
     border-bottom: 1px solid $white;
-    background-color: $black;
+    background-color: transparent;
     color: $white;
     cursor: pointer;
   }
