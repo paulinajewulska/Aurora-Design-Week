@@ -29,4 +29,3 @@ firestore.*
 database.rules.json
 firebase-debug.log
 .firebaserc
-firebaseConfig.js
