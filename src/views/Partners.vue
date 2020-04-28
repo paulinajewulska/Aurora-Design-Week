@@ -5,7 +5,11 @@
       Thanks everyone partners for helping make Aurora Design Week happen!
     </p>
     <ul class="partners__list">
-      <li v-for="partner in partnerLogoSrcPath" :key="partner.name">
+      <li
+        v-for="partner in partnerLogoSrcPath"
+        :key="partner.name"
+        class="partners__list__item"
+      >
         <v-lazy-image
           :src="
             require(`@/assets/partners/${partner.name}.${partner.fileExtension}`)
@@ -61,12 +65,18 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 4rem auto;
+    margin: 3rem auto 2rem;
     @media only screen and (min-width: $tablet) {
-      margin: 6rem auto;
+      margin: 4rem auto 3rem;
     }
     @media only screen and (min-width: $desktop) {
-      margin: 10rem auto;
+      margin: 5rem auto;
+    }
+    &__item {
+      margin: 1rem;
+      @media only screen and (min-width: $desktop) {
+        margin: 2rem;
+      }
     }
   }
 }
