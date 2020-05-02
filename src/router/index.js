@@ -5,6 +5,7 @@ import About from "@/views/About.vue";
 import Calendar from "@/views/Calendar.vue";
 import Event from "@/views/Event.vue";
 import Speakers from "@/views/Speakers.vue";
+import Speaker from "@/views/Speaker.vue";
 import Partners from "@/views/Partners.vue";
 import FAQ from "@/views/FAQ.vue";
 import Contact from "@/views/Contact.vue";
@@ -20,6 +21,7 @@ const routes = [
   { path: "/calendar/:month/:event", component: Event, name: "event" },
   { path: "/speakers", component: Speakers },
   { path: "/partners", component: Partners },
+  { path: "/speakers/:nameSurname", component: Speaker, name: "speakers" },
   { path: "/faq", component: FAQ },
   { path: "/contact", component: Contact },
   { path: "*", component: UnknownRoute }

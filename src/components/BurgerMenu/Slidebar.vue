@@ -14,7 +14,7 @@
               @mouseover="vm.$store.state.cursorHover = true"
               @mouseleave="vm.$store.state.cursorHover = false"
             >
-              <router-link :to="item">{{ item }}</router-link>
+              <router-link :to="getPath(item)">{{ item }}</router-link>
             </li>
           </ul>
         </nav>
@@ -36,6 +36,9 @@ export default {
     closeSidebarPanel: mutations.toggleNav,
     toggleBurger() {
       mutations.toggleNav();
+    },
+    getPath(path) {
+      return `/${path}`;
     }
   },
   computed: {

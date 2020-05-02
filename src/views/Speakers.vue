@@ -14,13 +14,31 @@
         v-for="speaker in speakers"
         :key="speaker.name"
         class="speakers__list-item"
-        @mousemove="vm.$store.state.isCursorRed = true"
-        @mouseleave="vm.$store.state.isCursorRed = false"
+        @mousemove="
+          (vm.$store.state.isCursorRed = true),
+            (vm.$store.state.cursorHover = true)
+        "
+        @mouseleave="
+          (vm.$store.state.isCursorRed = false),
+            (vm.$store.state.cursorHover = false)
+        "
         @mouseover="vm.imageSrcPath = speaker.image"
       >
-        <div class="speakers__list-item__name">{{ speaker.name }}</div>
-        <div class="speakers__list-item__surname">{{ speaker.surname }}</div>
-        <div class="speakers__list-item__circle">{{ speaker.country }}</div>
+        <router-link
+          class="speakers__router-link"
+          :to="{
+            name: 'speakers',
+            params: {
+              nameSurname: `${speaker.name}-${speaker.surname}`,
+              name: speaker.name,
+              surname: speaker.surname
+            }
+          }"
+        >
+          <div class="speakers__list-item__name">{{ speaker.name }}</div>
+          <div class="speakers__list-item__surname">{{ speaker.surname }}</div>
+          <div class="speakers__list-item__circle">{{ speaker.country }}</div>
+        </router-link>
       </li>
     </ul>
     <img
@@ -50,52 +68,9 @@ export default {
       yPhotoCenterPosition: 0,
       imageHeightCenter: 0,
       imageWidthCenter: 0,
-      speakers: [
-        {
-          name: "Nnamdi",
-          surname: "Obgonnaya",
-          country: "AU",
-          image: require("../assets/Speakers/jard-rusticus-Ib-4pQtdHt0-unsplash-min.jpg")
-        },
-        {
-          name: "Kweku",
-          surname: "Collins",
-          country: "BE",
-          image: require("../assets/Speakers/brian-lundquist-DwGIBfqLxno-unsplash-min.jpg")
-        },
-        {
-          name: "Kelly",
-          surname: "Owens",
-          country: "AU",
-          image: require("../assets/Speakers/andrey-zvyagintsev-3paYH1ewz3s-unsplash-min.jpg")
-        },
-        {
-          name: "Alex",
-          surname: "Cameron",
-          country: "JP",
-          image: require("../assets/Speakers/denis-agati--5Vl9oimYlU-unsplash-min.jpg")
-        },
-        {
-          name: "Korean",
-          surname: "breakfast",
-          country: "ES",
-          image: require("../assets/Speakers/levi-clancy-WE0gt7t4o2k-unsplash-min.jpg")
-        },
-        {
-          name: "Smino",
-          surname: "Williams",
-          country: "AU",
-          image: require("../assets/Speakers/thomas-mowe-cG-A0o4zV1w-unsplash-min.jpg")
-        },
-        {
-          name: "Josiah",
-          surname: "Faulkner",
-          country: "US",
-          image: require("../assets/Speakers/fayiz-musthafa-yGqsr6EVrGw-unsplash-min.jpg")
-        }
-      ],
       vm: this,
-      imagePath: ""
+      imagePath: "",
+      speakers: this.$store.state.speakers
     };
   },
   computed: {
@@ -156,19 +131,24 @@ $circle-size-desktop: 3.2rem;
 
 .speakers {
   min-height: 100vh;
+  &__router-link {
+    display: block;
+    color: $black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    text-transform: uppercase;
+    z-index: 99;
+    &:hover {
+      cursor: pointer;
+      color: $red;
+    }
+  }
   &__list {
     width: fit-content;
     &-item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      width: fit-content;
       font-size: 1.25rem;
-      text-transform: uppercase;
-      z-index: 99;
-      &:hover {
-        color: $red;
-      }
       @media only screen and (min-width: $tablet) {
         font-size: 3.5rem;
       }
