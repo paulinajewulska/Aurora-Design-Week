@@ -1,16 +1,34 @@
 <template>
-  <div class="calendar__month__day">
+  <router-link
+    class="calendar__month__day"
+    v-if="!isMenuOpen"
+    @mousemove.native="
+      (vm.$store.state.isCursorRed = true), (vm.$store.state.cursorHover = true)
+    "
+    @mouseleave.native="
+      (vm.$store.state.isCursorRed = false),
+        (vm.$store.state.cursorHover = false)
+    "
+    :to="{
+      name: 'event',
+      params: {
+        month: month,
+        event: `${date} ${month} - ${place}`
+      }
+    }"
+  >
     <p class="calendar__month__day__date">{{ date }}</p>
     <p class="calendar__month__day__place">{{ place }}</p>
     <p class="calendar__month__day__time">{{ time }}</p>
-  </div>
+  </router-link>
 </template>
 
 <script>
+import { store } from "../../store/index.js";
 export default {
   name: "CalendarDay",
   data: function() {
-    return {};
+    return { vm: this };
   },
   props: {
     date: {
@@ -24,6 +42,15 @@ export default {
     time: {
       type: String,
       required: true
+    },
+    month: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    isMenuOpen() {
+      return store.isNavOpen;
     }
   },
   components: {}
@@ -37,6 +64,9 @@ $breakpoints: $tablet, $desktop, $widescreen, $fullhd;
 $denominators: 3, 3, 4, 5;
 
 .calendar__month__day {
+  color: $black;
+  cursor: pointer;
+  z-index: 99999;
   @each $breakpoint in $breakpoints {
     @include calendar-month-day-width(
       $breakpoint,

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import OpeningPage from "@/views/OpeningPage.vue";
 import About from "@/views/About.vue";
 import Calendar from "@/views/Calendar.vue";
+import Event from "@/views/Event.vue";
 import Speakers from "@/views/Speakers.vue";
 import Partners from "@/views/Partners.vue";
 import FAQ from "@/views/FAQ.vue";
@@ -16,6 +17,7 @@ const routes = [
   { path: "/home", redirect: "/" },
   { path: "/about", component: About },
   { path: "/calendar", component: Calendar },
+  { path: "/calendar/:month/:event", component: Event, name: "event" },
   { path: "/speakers", component: Speakers },
   { path: "/partners", component: Partners },
   { path: "/faq", component: FAQ },

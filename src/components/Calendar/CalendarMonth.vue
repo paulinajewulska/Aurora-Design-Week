@@ -15,6 +15,7 @@
           :date="day.day"
           :place="day.place"
           :time="day.time"
+          :month="monthName"
         ></app-calendar-day>
       </div>
     </div>
