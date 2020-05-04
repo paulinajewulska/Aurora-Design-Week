@@ -6,12 +6,15 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "git push -f heroku master",
+    "heroku-postbuild": "npm run build",
+    "start": "http-server dist/ -d false -g"
   },
   "dependencies": {
     "buefy": "^0.8.12",
     "core-js": "^3.6.4",
-    "firebase": "^7.14.1",
+    "http-server": "^0.12.3",
     "vue": "^2.6.11",
     "vue-displacement-slideshow": "^2.3.1",
     "vue-router": "^3.1.5",
@@ -30,7 +33,6 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.1.2",
-    "firebase-tools": "^8.1.1",
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",

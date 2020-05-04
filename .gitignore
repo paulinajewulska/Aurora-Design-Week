@@ -21,11 +21,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-
-# firebase
-firebase.*
-firestore.*
-*.rules
-database.rules.json
-firebase-debug.log
-.firebaserc
