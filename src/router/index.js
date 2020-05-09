@@ -18,7 +18,12 @@ const routes = [
   { path: "/home", redirect: "/" },
   { path: "/about", component: About },
   { path: "/calendar", component: Calendar },
-  { path: "/calendar/:month/:event", component: Event, name: "event" },
+  {
+    path: "/calendar/:month/:event",
+    component: Event,
+    name: "event",
+    props: true
+  },
   { path: "/speakers", component: Speakers },
   { path: "/partners", component: Partners },
   { path: "/speakers/:nameSurname", component: Speaker, name: "speakers" },

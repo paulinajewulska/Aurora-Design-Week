@@ -13,7 +13,10 @@
       name: 'event',
       params: {
         month: month,
-        event: `${date} ${month} - ${place}`
+        event: `${date}-${place}`,
+        date: date,
+        place: place,
+        time: time
       }
     }"
   >
@@ -25,6 +28,7 @@
 
 <script>
 import { store } from "../../store/index.js";
+
 export default {
   name: "CalendarDay",
   data: function() {
