@@ -1,5 +1,8 @@
 # Aurora Design Week ✨✨
 
+Live: [link](https://aurora-design-week.herokuapp.com)
+(Recommended browsers: Opera & Chrome)
+
 ## Build Setup
 
 ### Dependencies
