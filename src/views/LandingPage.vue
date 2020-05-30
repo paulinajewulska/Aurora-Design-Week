@@ -16,15 +16,10 @@
         <span class="column landing-page__title__word">Aurora</span>
       </div>
       <div class="landing-page__title__word-wrapper">
-        <span
-          class="column is-offset-1-touch is-offset-2-desktop landing-page__title__word"
-          >Design</span
-        >
+        <span class="column is-offset-1-touch is-offset-2-desktop landing-page__title__word">Design</span>
       </div>
       <div class="landing-page__title__word-wrapper">
-        <span class="column is-offset-1-desktop landing-page__title__word"
-          >Week</span
-        >
+        <span class="column is-offset-1-desktop landing-page__title__word">Week</span>
       </div>
       <div class="landing-page__title__word-wrapper">
         <span class="column landing-page__title__word">2019</span>
@@ -33,34 +28,16 @@
     <p class="column landing-page__date">JUNE 13 - 20</p>
     <p
       class="column is-3-desktop is-offset-7-desktop is-hidden-touch landing-page__paragraph"
-    >
-      7 days of free for all talks, designs, installations & performances.
-    </p>
-    <ul
-      class="landing-page__social-media__list is-hidden-touch"
-      v-if="!isMenuOpen"
-    >
+    >7 days of free for all talks, designs, installations & performances.</p>
+    <ul class="landing-page__social-media__list is-hidden-touch" v-if="!isMenuOpen">
       <li
+        v-for="media in this.socialMedia"
+        :key="media.id"
         class="landing-page__social-media__list-item"
         @mouseover="vm.$store.state.cursorHover = true"
         @mouseleave="vm.$store.state.cursorHover = false"
       >
-        <a href="https://facebook.com" target="_blank">Facebook</a>
-      </li>
-      <li
-        class="landing-page__social-media__list-item"
-        @mouseover="vm.$store.state.cursorHover = true"
-        @mouseleave="vm.$store.state.cursorHover = false"
-      >
-        <a href="https://twitter.com" target="_blank">Twitter</a>
-      </li>
-
-      <li
-        class="landing-page__social-media__list-item"
-        @mouseover="vm.$store.state.cursorHover = true"
-        @mouseleave="vm.$store.state.cursorHover = false"
-      >
-        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a :href="media.link" target="_blank">{{ media.name }}</a>
       </li>
     </ul>
     <div class="landing-page__arrow-container">
@@ -79,7 +56,21 @@ export default {
   name: "LandingPage",
   data: function() {
     return {
-      vm: this
+      vm: this,
+      socialMedia: [
+        {
+          name: "Instagram",
+          link: "https://instagram.com"
+        },
+        {
+          name: "Twitter",
+          link: "https://twitter.com"
+        },
+        {
+          name: "Facebook",
+          link: "https://facebook.com"
+        }
+      ]
     };
   },
   components: {
@@ -100,10 +91,12 @@ export default {
   },
   methods: {
     init() {
-      //We loop through all our images by calling the 'next' method of our component every 6 seconds
+      //We loop through all our images by calling the 'next' method of our component every 2 seconds
       setInterval(() => {
-        this.$refs.slideshow.next();
-      }, 6000);
+        if (this.$refs.slideshow) {
+          this.$refs.slideshow.next();
+        }
+      }, 2000);
     },
     animateText(className, delay, duration, y) {
       gsap.from(`.${className}`, {
