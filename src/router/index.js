@@ -4,6 +4,7 @@ import OpeningPage from "@/views/OpeningPage.vue";
 import About from "@/views/About.vue";
 import Calendar from "@/views/Calendar.vue";
 import Event from "@/views/Event.vue";
+import BuyTicket from "@/views/BuyTicket.vue";
 import Speakers from "@/views/Speakers.vue";
 import Speaker from "@/views/Speaker.vue";
 import Partners from "@/views/Partners.vue";
@@ -22,6 +23,12 @@ const routes = [
     path: "/calendar/:month/:event",
     component: Event,
     name: "event",
+    props: true
+  },
+  {
+    path: "/calendar/:month/:event/buy-ticket",
+    component: BuyTicket,
+    name: "buyTicket",
     props: true
   },
   { path: "/speakers", component: Speakers },

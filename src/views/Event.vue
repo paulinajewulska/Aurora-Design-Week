@@ -1,5 +1,11 @@
 <template>
-  <section class="event" @mouseover="vm.$store.state.isCursorRed = true">
+  <section
+    class="event"
+    @mouseover="
+      (vm.$store.state.isCursorRed = true),
+        (vm.$store.state.cursorHover = false)
+    "
+  >
     <h1 class="event__title">LECTURE NIGHT</h1>
     <h2 class="event__date">{{ getAllInfoAboutEvents.place }}</h2>
     <h2 class="event__date">
@@ -22,7 +28,25 @@
           {{ event.name }}
         </div>
         <div class="event__paragraph__text">{{ event.description }}</div>
-        <button class="event__button" type="submit">BUY TICKET</button>
+        <router-link
+          class="event__button"
+          v-if="!isMenuOpen"
+          @mousemove.native="
+            (vm.$store.state.isCursorRed = true),
+              (vm.$store.state.cursorHover = true)
+          "
+          @mouseleave.native="
+            (vm.$store.state.isCursorRed = false),
+              (vm.$store.state.cursorHover = false)
+          "
+          :to="{
+            name: 'buyTicket',
+            params: {
+              title: event.name
+            }
+          }"
+          >BUY TICKET</router-link
+        >
       </div>
     </div>
   </section>
@@ -30,6 +54,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { store } from "../store/index.js";
 
 export default {
   name: "Event",
@@ -59,6 +84,9 @@ export default {
         this.place,
         this.time
       );
+    },
+    isMenuOpen() {
+      return store.isNavOpen;
     }
   }
 };
@@ -163,6 +191,7 @@ $circle-size-desktop: 1.5rem;
     color: $white;
     background-color: transparent;
     cursor: pointer;
+    z-index: 99999;
   }
 }
 </style>
