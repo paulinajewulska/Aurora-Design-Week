@@ -31,9 +31,9 @@ const routes = [
     name: "buyTicket",
     props: true
   },
-  { path: "/speakers", component: Speakers },
+  { path: "/speakers", component: Speakers, name: "speakers" },
   { path: "/partners", component: Partners },
-  { path: "/speakers/:nameSurname", component: Speaker, name: "speakers" },
+  { path: "/speakers/:nameSurname", component: Speaker, name: "speaker" },
   { path: "/faq", component: FAQ },
   { path: "/contact", component: Contact },
   { path: "*", component: UnknownRoute }

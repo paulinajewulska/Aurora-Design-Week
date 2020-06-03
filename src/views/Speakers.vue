@@ -14,20 +14,15 @@
         v-for="speaker in speakers"
         :key="speaker.name"
         class="speakers__list-item"
-        @mousemove="
-          (vm.$store.state.isCursorRed = true),
-            (vm.$store.state.cursorHover = true)
-        "
-        @mouseleave="
-          (vm.$store.state.isCursorRed = false),
-            (vm.$store.state.cursorHover = false)
-        "
+        @mousemove="vm.$store.state.cursorHover = true"
+        @mouseleave="vm.$store.state.cursorHover = false"
         @mouseover="vm.imageSrcPath = speaker.image"
       >
+        <!-- <p class="speakers__list-item__number">{{ index + 1 }}.</p> -->
         <router-link
           class="speakers__router-link"
           :to="{
-            name: 'speakers',
+            name: 'speaker',
             params: {
               nameSurname: `${speaker.name}-${speaker.surname}`,
               name: speaker.name,
@@ -37,8 +32,8 @@
         >
           <div class="speakers__list-item__name">{{ speaker.name }}</div>
           <div class="speakers__list-item__surname">{{ speaker.surname }}</div>
-          <div class="speakers__list-item__circle">{{ speaker.country }}</div>
         </router-link>
+        <div class="speakers__list-item__circle">{{ speaker.country }}</div>
       </li>
     </ul>
     <img
@@ -125,40 +120,50 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/main.scss";
 
-$circle-size-mobile: 2.1rem;
+$circle-size-mobile: 3.25rem;
 $circle-size-tablet: 3rem;
 $circle-size-desktop: 3.2rem;
 
 .speakers {
   min-height: 100vh;
   &__router-link {
-    display: block;
-    color: $black;
     position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     width: fit-content;
+    color: $black;
     text-transform: uppercase;
     z-index: 99;
+    @media only screen and (min-width: $tablet) {
+      flex-direction: row;
+      align-items: center;
+    }
     &:hover {
-      cursor: pointer;
       color: $red;
+      cursor: pointer;
     }
   }
   &__list {
     width: fit-content;
     &-item {
-      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: 2.2rem;
+      line-height: 2rem;
       @media only screen and (min-width: $tablet) {
+        margin: 0;
         font-size: 3.5rem;
+        line-height: 1.5;
       }
       @media only screen and (min-width: $desktop) {
         font-size: 3rem;
       }
       &__name,
       &__surname {
-        width: fit-content;
         margin-right: 0.75rem;
+        width: fit-content;
+        letter-spacing: 0.05rem;
       }
       &__circle {
         display: flex;
@@ -166,7 +171,7 @@ $circle-size-desktop: 3.2rem;
         align-items: center;
         width: $circle-size-mobile;
         height: $circle-size-mobile;
-        font-size: 1.1rem;
+        font-size: 1.8rem;
         border: 0.15rem solid $black;
         border-radius: 50%;
         @media only screen and (min-width: $tablet) {
