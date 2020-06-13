@@ -1,21 +1,20 @@
 <template>
   <section
     class="buy-ticket"
-    @mouseover="
-      (vm.$store.state.isCursorRed = true),
-        (vm.$store.state.cursorHover = false)
-    "
+    @mouseover="changeCursor({ color: 'red', hover: false })"
   >
     <p
       class="buy-ticket__title column is-12-mobile is-6-tablet is-5-desktop is-5-fullhd"
-    >{{ title }}</p>
+    >
+      {{ title }}
+    </p>
     <app-buy-ticket-form></app-buy-ticket-form>
   </section>
 </template>
 
 <script>
 import BuyTicketForm from "../components/Calendar/BuyTicketForm.vue";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "buy-ticket",
@@ -29,8 +28,8 @@ export default {
       type: String
     }
   },
-  computed: {
-    ...mapMutations(["isCursorRed"])
+  methods: {
+    ...mapActions(["changeCursor"])
   },
   components: {
     AppBuyTicketForm: BuyTicketForm

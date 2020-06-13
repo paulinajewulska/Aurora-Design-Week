@@ -1,5 +1,8 @@
 <template>
-  <section class="about" @mouseenter="vm.$store.state.isCursorRed = false">
+  <section
+    class="about"
+    @mouseover="changeCursor({ color: 'black', hover: false })"
+  >
     <app-subtitle :subtitle="this.name"></app-subtitle>
     <div class="about__wrapper">
       <p class="about__paragraph">
@@ -35,7 +38,7 @@
         physical and virtual), and that’s why it also often finds itself in a
         grey zone between legality and illegality.
       </p>
-      <p v-if="$route.path === '/About'" class="about__paragraph">
+      <p v-if="$route.path === '/about'" class="about__paragraph">
         Because whoever launches a citizen initiative or claims civil rights
         doesn’t yet know whether they will be agreed to or not. Will an
         authority accept and regulate them, or will it work against these
@@ -55,15 +58,15 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "About",
   data: function() {
     return { name: "About", vm: this };
   },
-  computed: {
-    ...mapMutations(["setCursorHover", "isCursorRed"])
+  methods: {
+    ...mapActions(["changeCursor"])
   },
   components: {
     AppSubtitle: Subtitle

@@ -2,13 +2,8 @@
   <router-link
     class="calendar__month__day"
     v-if="!isMenuOpen"
-    @mousemove.native="
-      (vm.$store.state.isCursorRed = true), (vm.$store.state.cursorHover = true)
-    "
-    @mouseleave.native="
-      (vm.$store.state.isCursorRed = false),
-        (vm.$store.state.cursorHover = false)
-    "
+    @mousemove.native="changeCursor({ color: 'red', hover: true })"
+    @mouseleave.native="changeCursor({ color: 'black', hover: false })"
     :to="{
       name: 'event',
       params: {
@@ -28,6 +23,7 @@
 
 <script>
 import { store } from "../../store/index.js";
+import { mapActions } from "vuex";
 
 export default {
   name: "CalendarDay",
@@ -57,7 +53,9 @@ export default {
       return store.isNavOpen;
     }
   },
-  components: {}
+  methods: {
+    ...mapActions(["changeCursor"])
+  }
 };
 </script>
 

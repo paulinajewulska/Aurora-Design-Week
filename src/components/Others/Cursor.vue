@@ -26,11 +26,14 @@ export default {
     };
   },
   computed: {
-    ...mapState(["cursorHover", "isCursorRed"]),
+    ...mapState(["cursorHover", "cursorColor"]),
     cursorPoint() {
       return `transform: translateX(${this.xPosition -
         this.centerPosition}px) translateY(${this.yPosition -
         this.centerPosition}px) translateZ(0) translate3d(0, 0, 0);`;
+    },
+    isCursorRed() {
+      return this.cursorColor === "red";
     }
   },
   methods: {

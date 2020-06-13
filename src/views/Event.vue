@@ -1,10 +1,7 @@
 <template>
   <section
     class="event"
-    @mouseover="
-      (vm.$store.state.isCursorRed = true),
-        (vm.$store.state.cursorHover = false)
-    "
+    @mouseover="changeCursor({ color: 'red', hover: false })"
   >
     <h1 class="event__title">LECTURE NIGHT</h1>
     <h2 class="event__date">{{ getAllInfoAboutEvents.place }}</h2>
@@ -31,14 +28,8 @@
         <router-link
           class="event__button"
           v-if="!isMenuOpen"
-          @mousemove.native="
-            (vm.$store.state.isCursorRed = true),
-              (vm.$store.state.cursorHover = true)
-          "
-          @mouseleave.native="
-            (vm.$store.state.isCursorRed = false),
-              (vm.$store.state.cursorHover = false)
-          "
+          @mousemove.native="changeCursor({ color: 'red', hover: true })"
+          @mouseleave.native="changeCursor({ color: 'black', hover: false })"
           :to="{
             name: 'buyTicket',
             params: {
@@ -53,7 +44,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { store } from "../store/index.js";
 
 export default {
@@ -88,6 +79,9 @@ export default {
     isMenuOpen() {
       return store.isNavOpen;
     }
+  },
+  methods: {
+    ...mapActions(["changeCursor"])
   }
 };
 </script>

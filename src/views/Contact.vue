@@ -1,5 +1,8 @@
 <template>
-  <section class="contact" @mouseover="vm.$store.state.isCursorRed = true">
+  <section
+    class="contact"
+    @mouseover="changeCursor({ color: 'red', hover: false })"
+  >
     <app-subtitle
       :subtitle="this.name"
       class="contact__subtitle"
@@ -28,7 +31,7 @@
 import Subtitle from "../components/Others/Subtitle.vue";
 import ContactApplication from "../components/Contact/ContactApplication.vue";
 import ContactQuestion from "../components/Contact/ContactQuestion.vue";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "Contact",
@@ -38,8 +41,8 @@ export default {
       vm: this
     };
   },
-  computed: {
-    ...mapMutations(["isCursorRed"])
+  methods: {
+    ...mapActions(["changeCursor"])
   },
   components: {
     AppSubtitle: Subtitle,

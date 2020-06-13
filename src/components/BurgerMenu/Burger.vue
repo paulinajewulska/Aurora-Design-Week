@@ -3,8 +3,8 @@
     class="burger"
     :class="{ active: isBurgerActive }"
     @click.prevent="toggle"
-    @mouseover="vm.$store.state.cursorHover = true"
-    @mouseleave="vm.$store.state.cursorHover = false"
+    @mouseover="changeCursor({ hover: true })"
+    @mouseleave="changeCursor({ hover: false })"
   >
     <button type="button" class="burger-button">
       <span class="burger-button__bar burger-button__bar--top"></span>
@@ -15,7 +15,7 @@
 
 <script>
 import { store, mutations } from "../../store/index.js";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   data: function() {
@@ -24,12 +24,12 @@ export default {
     };
   },
   computed: {
-    ...mapMutations(["setCursorHover"]),
     isBurgerActive() {
       return store.isNavOpen;
     }
   },
   methods: {
+    ...mapActions(["changeCursor"]),
     toggle() {
       mutations.toggleNav();
     }

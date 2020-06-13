@@ -1,5 +1,8 @@
 <template>
-  <section class="calendar" @mouseover="vm.$store.state.isCursorRed = false">
+  <section
+    class="calendar"
+    @mouseover="changeCursor({ color: 'black', hover: false })"
+  >
     <app-subtitle :subtitle="this.name"></app-subtitle>
     <div
       class="calendar__months"
@@ -14,7 +17,7 @@
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
 import CalendarMonth from "../components/Calendar/CalendarMonth.vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Partners",
@@ -22,8 +25,10 @@ export default {
     return { name: "Upcoming shows", vm: this };
   },
   computed: {
-    ...mapGetters(["getMonthNames"]),
-    ...mapMutations(["isCursorRed"])
+    ...mapGetters(["getMonthNames"])
+  },
+  methods: {
+    ...mapActions(["changeCursor"])
   },
   components: {
     AppSubtitle: Subtitle,

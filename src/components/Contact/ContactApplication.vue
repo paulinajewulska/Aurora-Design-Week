@@ -30,13 +30,21 @@
       <p v-if="validationError" class="contact__form__error">
         {{ validationError }}
       </p>
-      <button class="contact__button" type="submit">SEND</button>
+      <button
+        class="contact__button"
+        type="submit"
+        @mousemove="changeCursor({ color: 'red', hover: true })"
+        @mouseleave="changeCursor({ color: 'red', hover: false })"
+      >
+        SEND
+      </button>
     </form>
   </div>
 </template>
 
 <script>
 import { setApplicant } from "../../../firebaseConfig";
+import { mapActions } from "vuex";
 
 export default {
   name: "ContactApplication",
@@ -61,6 +69,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["changeCursor"]),
     sendApplication(e) {
       e.preventDefault();
 
@@ -155,6 +164,7 @@ export default {
     background-color: transparent;
     color: $white;
     cursor: pointer;
+    z-index: 99999;
   }
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <section class="partners" @mouseover="vm.$store.state.isCursorRed = false">
+  <section
+    class="partners"
+    @mouseover="changeCursor({ color: 'black', hover: false })"
+  >
     <app-subtitle :subtitle="this.name"></app-subtitle>
     <p class="partners__paragraph">
       Thanks everyone partners for helping make Aurora Design Week happen!
@@ -23,7 +26,7 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "partners",
@@ -44,8 +47,8 @@ export default {
       vm: this
     };
   },
-  computed: {
-    ...mapMutations(["isCursorRed"])
+  methods: {
+    ...mapActions(["changeCursor"])
   },
   components: {
     AppSubtitle: Subtitle

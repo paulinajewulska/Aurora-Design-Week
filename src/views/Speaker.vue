@@ -1,10 +1,7 @@
 <template>
   <section
     class="speaker"
-    @mouseover="
-      (vm.$store.state.isCursorRed = false),
-        (vm.$store.state.cursorHover = false)
-    "
+    @mouseover="changeCursor({ color: 'black', hover: false })"
   >
     <h2
       class="speaker__title column is-12-mobile is-6-tablet is-6-desktop is-6-fullhd"
@@ -44,14 +41,8 @@
     <router-link
       class="speaker__button column is-12-mobile is-12-tablet is-12-desktop is-12-fullhd"
       v-if="!isMenuOpen"
-      @mousemove.native="
-        (vm.$store.state.isCursorRed = true),
-          (vm.$store.state.cursorHover = true)
-      "
-      @mouseleave.native="
-        (vm.$store.state.isCursorRed = false),
-          (vm.$store.state.cursorHover = false)
-      "
+      @mousemove.native="changeCursor({ color: 'red', hover: true })"
+      @mouseleave.native="changeCursor({ color: 'black', hover: false })"
       :to="{
         name: 'speakers'
       }"
@@ -61,7 +52,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { store } from "../store/index.js";
 
 export default {
@@ -76,6 +67,9 @@ export default {
     isMenuOpen() {
       return store.isNavOpen;
     }
+  },
+  methods: {
+    ...mapActions(["changeCursor"])
   }
 };
 </script>

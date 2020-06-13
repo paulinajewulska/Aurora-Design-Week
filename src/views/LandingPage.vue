@@ -1,5 +1,8 @@
 <template>
-  <section class="landing-page" @mouseover="vm.$store.state.isCursorRed = true">
+  <section
+    class="landing-page"
+    @mouseover="changeCursor({ color: 'red', hover: false })"
+  >
     <vue-displacement-slideshow
       class="landing-page__slideshow"
       :images="images"
@@ -16,10 +19,15 @@
         <span class="column landing-page__title__word">Aurora</span>
       </div>
       <div class="landing-page__title__word-wrapper">
-        <span class="column is-offset-1-touch is-offset-2-desktop landing-page__title__word">Design</span>
+        <span
+          class="column is-offset-1-touch is-offset-2-desktop landing-page__title__word"
+          >Design</span
+        >
       </div>
       <div class="landing-page__title__word-wrapper">
-        <span class="column is-offset-1-desktop landing-page__title__word">Week</span>
+        <span class="column is-offset-1-desktop landing-page__title__word"
+          >Week</span
+        >
       </div>
       <div class="landing-page__title__word-wrapper">
         <span class="column landing-page__title__word">2019</span>
@@ -28,14 +36,19 @@
     <p class="column landing-page__date">JUNE 13 - 20</p>
     <p
       class="column is-3-desktop is-offset-7-desktop is-hidden-touch landing-page__paragraph"
-    >7 days of free for all talks, designs, installations & performances.</p>
-    <ul class="landing-page__social-media__list is-hidden-touch" v-if="!isMenuOpen">
+    >
+      7 days of free for all talks, designs, installations & performances.
+    </p>
+    <ul
+      class="landing-page__social-media__list is-hidden-touch"
+      v-if="!isMenuOpen"
+    >
       <li
         v-for="media in this.socialMedia"
         :key="media.id"
         class="landing-page__social-media__list-item"
-        @mouseover="vm.$store.state.cursorHover = true"
-        @mouseleave="vm.$store.state.cursorHover = false"
+        @mousemove="changeCursor({ color: 'red', hover: true })"
+        @mouseleave="changeCursor({ color: 'red', hover: false })"
       >
         <a :href="media.link" target="_blank">{{ media.name }}</a>
       </li>
@@ -48,9 +61,10 @@
 
 <script>
 import VueDisplacementSlideshow from "vue-displacement-slideshow";
+
 import { gsap } from "gsap";
-import { mapMutations } from "vuex";
 import { store } from "../store/index.js";
+import { mapActions } from "vuex";
 
 export default {
   name: "LandingPage",
@@ -77,7 +91,6 @@ export default {
     VueDisplacementSlideshow
   },
   computed: {
-    ...mapMutations(["setCursorHover", "isCursorRed"]),
     images() {
       return [
         require("../assets/LandingPage/mart-pieterman-4XIUmOxP2xQ-unsplash.jpg"),
@@ -90,6 +103,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["changeCursor"]),
     init() {
       //We loop through all our images by calling the 'next' method of our component every 2 seconds
       setInterval(() => {

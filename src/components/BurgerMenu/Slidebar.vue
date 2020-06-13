@@ -1,5 +1,8 @@
 <template>
-  <div class="sidebar" @mouseover="vm.$store.state.isCursorRed = true">
+  <div
+    class="sidebar"
+    @mouseover="changeCursor({ color: 'red', hover: false })"
+  >
     <transition name="slide">
       <div v-if="isPanelOpen" class="sidebar__panel">
         <nav>
@@ -8,11 +11,9 @@
               v-for="item in this.$store.state.menu"
               :key="item.id"
               class="sidebar__menu__item"
-              @click.prevent="
-                toggleBurger(), (vm.$store.state.cursorHover = false)
-              "
-              @mouseover="vm.$store.state.cursorHover = true"
-              @mouseleave="vm.$store.state.cursorHover = false"
+              @click.prevent="toggleBurger()"
+              @mousemove="changeCursor({ color: 'red', hover: true })"
+              @mouseleave="changeCursor({ color: 'red', hover: false })"
             >
               <router-link :to="getPath(item)">{{ item }}</router-link>
             </li>
@@ -24,7 +25,7 @@
 </template>
 <script>
 import { store, mutations } from "../../store/index.js";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   data: function() {
@@ -33,6 +34,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["changeCursor"]),
     closeSidebarPanel: mutations.toggleNav,
     toggleBurger() {
       mutations.toggleNav();

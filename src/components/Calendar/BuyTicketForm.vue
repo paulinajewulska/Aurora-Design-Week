@@ -42,14 +42,8 @@
       <router-link
         class="buy-ticket__button"
         v-if="!isMenuOpen"
-        @mousemove.native="
-          (vm.$store.state.isCursorRed = true),
-            (vm.$store.state.cursorHover = true)
-        "
-        @mouseleave.native="
-          (vm.$store.state.isCursorRed = false),
-            (vm.$store.state.cursorHover = false)
-        "
+        @mousemove.native="changeCursor({ color: 'red', hover: true })"
+        @mouseleave.native="changeCursor({ color: 'red', hover: false })"
         :to="{
           name: 'buyTicket'
         }"
@@ -60,8 +54,8 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 import { store } from "../../store/index.js";
+import { mapActions } from "vuex";
 
 export default {
   name: "buy-ticket",
@@ -84,7 +78,6 @@ export default {
     }
   },
   computed: {
-    ...mapMutations(["isCursorRed"]),
     price() {
       const finalPrice = this.startPrice * this.buyTicketForm.numberOfTickets;
       return `$${finalPrice}.00`;
@@ -102,6 +95,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["changeCursor"]),
     buyTickets(e) {
       e.preventDefault();
       const firstName = this.buyTicketForm.firstName.trim();

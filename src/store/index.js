@@ -20,7 +20,7 @@ Vue.use(VLazyImagePlugin);
 export default new Vuex.Store({
   state: {
     cursorHover: false,
-    isCursorRed: true,
+    cursorColor: "red",
     months: [
       {
         name: "June",
@@ -393,8 +393,20 @@ export default new Vuex.Store({
       }
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    changeCursor(state, payload) {
+      const colors = ["red", "black"]; // all possible colors
+      if (colors.includes(payload.color)) {
+        state.cursorColor = payload.color;
+      }
+      state.cursorHover = payload.hover;
+    }
+  },
+  actions: {
+    changeCursor: ({ commit }, payload) => {
+      commit("changeCursor", payload);
+    }
+  },
   modules: {}
 });
 

@@ -1,14 +1,14 @@
 <template>
   <section
     class="unknown-route"
-    @mouseover="vm.$store.state.isCursorRed = false"
+    @mouseover.native="changeCursor({ color: 'black', hover: true })"
   >
     <p class="unknown-route__title">Page not found :(</p>
   </section>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "UnknownRoute",
@@ -17,7 +17,7 @@ export default {
       vm: this
     };
   },
-  omputed: { ...mapMutations(["isCursorRed"]) }
+  methods: { ...mapActions(["changeCursor"]) }
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <section
     class="speakers"
-    @mouseover="vm.$store.state.isCursorRed = false"
+    @mouseover="changeCursor({ color: 'black', hover: false })"
     @mouseenter="setInitialImagePosition"
   >
     <app-subtitle :subtitle="this.name"></app-subtitle>
@@ -14,13 +14,14 @@
         v-for="speaker in speakers"
         :key="speaker.name"
         class="speakers__list-item"
-        @mousemove="vm.$store.state.cursorHover = true"
-        @mouseleave="vm.$store.state.cursorHover = false"
-        @mouseover="vm.imageSrcPath = speaker.image"
       >
-        <!-- <p class="speakers__list-item__number">{{ index + 1 }}.</p> -->
         <router-link
           class="speakers__router-link"
+          @mousemove.native="
+            (vm.imageSrcPath = speaker.image),
+              changeCursor({ color: 'black', hover: true })
+          "
+          @mouseleave.native="changeCursor({ color: 'black', hover: false })"
           :to="{
             name: 'speaker',
             params: {
@@ -51,7 +52,7 @@
 
 <script>
 import Subtitle from "../components/Others/Subtitle.vue";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "Speakers",
@@ -69,7 +70,6 @@ export default {
     };
   },
   computed: {
-    ...mapMutations(["setCursorHover", "isCursorRed"]),
     cursorOnList: {
       get: function() {
         return this.isCursorOnList;
@@ -91,6 +91,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["changeCursor"]),
     moveImage(e) {
       this.isCursorOnList = true;
       this.imageHeightCenter = this.$refs.image.clientHeight / 2;
@@ -133,7 +134,7 @@ $circle-size-desktop: 3.2rem;
     width: fit-content;
     color: $black;
     text-transform: uppercase;
-    z-index: 99;
+    z-index: 9999;
     @media only screen and (min-width: $tablet) {
       flex-direction: row;
       align-items: center;
