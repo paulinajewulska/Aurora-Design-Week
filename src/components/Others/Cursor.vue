@@ -5,6 +5,7 @@
       { cursor__hover: cursorHover },
       { cursor__hide: hideCursor },
       { cursor__red: isCursorRed },
+      { cursor__menu: isPanelOpen },
       'is-hidden-touch'
     ]"
   >
@@ -14,6 +15,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { store } from "../../store/index.js";
 
 export default {
   name: "app-cursor",
@@ -34,6 +36,9 @@ export default {
     },
     isCursorRed() {
       return this.cursorColor === "red";
+    },
+    isPanelOpen() {
+      return store.isNavOpen;
     }
   },
   methods: {
@@ -58,6 +63,10 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/main.scss";
 .cursor {
+  &__menu {
+    position: fixed;
+    z-index: 9999999;
+  }
   &__hover {
     & div {
       width: 3.5rem;

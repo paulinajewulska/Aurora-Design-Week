@@ -76,7 +76,7 @@ export default {
     height: 100vh;
     background-color: $black;
     text-align: center;
-    z-index: 9999;
+    z-index: 999999;
   }
   &__menu {
     display: flex;
@@ -107,9 +107,7 @@ export default {
       text-align: left;
       text-transform: uppercase;
       cursor: pointer;
-      & > * {
-        z-index: 999999;
-      }
+      z-index: 99999999;
     }
   }
 }
