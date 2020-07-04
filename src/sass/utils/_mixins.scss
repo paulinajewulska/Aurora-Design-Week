@@ -10,7 +10,7 @@
 @mixin line($width) {
         width: $width;
         height: 1px;
-        background-color: $light-gray;
+        background-color: $black;
 }
 
 @mixin calendar-month-day-width($breakpoint, $count) {

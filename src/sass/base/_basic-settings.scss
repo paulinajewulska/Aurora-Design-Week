@@ -2,6 +2,7 @@ body {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;   /* Defines the fallback font */
   color: $black !important;
+  letter-spacing: 0.04rem !important;
 }
 
 /* Switch to the custom font when it's loaded */

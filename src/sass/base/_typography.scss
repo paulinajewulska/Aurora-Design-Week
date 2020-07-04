@@ -1,7 +1,6 @@
 h1 {
     margin: 0;
     width: fit-content;
-    line-height: 0.8em !important;
     font-size: $font-mobile;
     @media only screen and (min-width: $tablet) {
       font-size: $font-tablet;

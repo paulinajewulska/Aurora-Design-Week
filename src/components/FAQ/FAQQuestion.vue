@@ -67,7 +67,7 @@ $circle-size-desktop: 1.5rem;
 .FAQ {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   &__question {
     display: flex;
     align-items: baseline;

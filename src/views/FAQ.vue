@@ -3,7 +3,7 @@
     class="FAQ"
     @mouseover="changeCursor({ color: 'black', hover: false })"
   >
-    <app-subtitle :subtitle="this.name"></app-subtitle>
+    <h1 class="FAQ__title">{{ name }}</h1>
     <div class="FAQ__questions-wrapper">
       <app-f-a-q-question
         v-for="question in questions"
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import Subtitle from "../components/Others/Subtitle.vue";
 import FAQQuestion from "../components/FAQ/FAQQuestion.vue";
 import { mapState, mapActions } from "vuex";
 
@@ -34,7 +33,6 @@ export default {
     ...mapActions(["changeCursor"])
   },
   components: {
-    AppSubtitle: Subtitle,
     AppFAQQuestion: FAQQuestion
   }
 };
@@ -44,6 +42,9 @@ export default {
 @import "../sass/main.scss";
 
 .FAQ {
+  &__title {
+    padding: 3rem 0;
+  }
   &__questions-wrapper {
     display: flex;
     flex-direction: column;
