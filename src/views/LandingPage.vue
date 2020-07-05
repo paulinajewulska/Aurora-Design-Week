@@ -3,6 +3,17 @@
     class="landing-page"
     @mouseover="changeCursor({ color: 'red', hover: false })"
   >
+    <h1 class="landing-page__title">
+      <span class="column landing-page__title__word">Aurora</span>
+      <span class="column is-offset-2 landing-page__title__word">Design</span>
+      <span class="column is-offset-1 landing-page__title__word">Week</span>
+      <span class="column is-hidden-desktop landing-page__title__word"
+        >2020</span
+      >
+      <span class="column is-hidden-touch landing-page__title__word"
+        >13-20 July 2020</span
+      >
+    </h1>
     <vue-displacement-slideshow
       class="landing-page__slideshow"
       :images="images"
@@ -10,35 +21,9 @@
       :intensity="0.8"
       :speedIn="1.5"
       :speedOut="1.5"
-      :angle="Math.PI / 3"
       ease="expo.out"
       ref="slideshow"
     ></vue-displacement-slideshow>
-    <h1 class="landing-page__title columns is-mobile">
-      <div class="landing-page__title__word-wrapper">
-        <span class="column landing-page__title__word">Aurora</span>
-      </div>
-      <div class="landing-page__title__word-wrapper">
-        <span
-          class="column is-offset-1-touch is-offset-2-desktop landing-page__title__word"
-          >Design</span
-        >
-      </div>
-      <div class="landing-page__title__word-wrapper">
-        <span class="column is-offset-1-desktop landing-page__title__word"
-          >Week</span
-        >
-      </div>
-      <div class="landing-page__title__word-wrapper">
-        <span class="column landing-page__title__word">2019</span>
-      </div>
-    </h1>
-    <p class="column landing-page__date">JUNE 13 - 20</p>
-    <p
-      class="column is-3-desktop is-offset-7-desktop is-hidden-touch landing-page__paragraph"
-    >
-      7 days of free for all talks, designs, installations & performances.
-    </p>
     <ul
       class="landing-page__social-media__list is-hidden-touch"
       v-if="!isMenuOpen"
@@ -53,9 +38,9 @@
         <a :href="media.link" target="_blank">{{ media.name }}</a>
       </li>
     </ul>
-    <div class="landing-page__arrow-container">
-      <div class="landing-page__arrow"></div>
-    </div>
+    <p class="landing-page__scroll-wrapper">
+      <span class="landing-page__scroll">Scroll down</span>
+    </p>
   </section>
 </template>
 
@@ -112,21 +97,31 @@ export default {
         }
       }, 2000);
     },
-    animateText(className, delay, duration, y) {
-      gsap.from(`.${className}`, {
+    animate() {
+      gsap.to("body", 0, { css: { visibility: "visible" } });
+
+      const tl = gsap.timeline();
+
+      tl.from(".landing-page__title__word", 1.8, {
+        y: 150,
+        ease: "power4.out",
+        delay: 1,
+        skewY: 7,
         opacity: 0,
-        duration: duration,
-        y: y,
-        delay: delay,
-        ease: "power4.out"
+        stagger: {
+          amount: 0.3
+        }
+      }).from(".landing-page__date", 1, {
+        y: 15,
+        ease: "power4.out",
+        skewY: 5,
+        opacity: 0
       });
     }
   },
   mounted() {
     this.init();
-    this.animateText("landing-page__title__word", 1.5, 1.5, "100%");
-    this.animateText("landing-page__date", 2, 1.5, "2vh");
-    this.animateText("landing-page__paragraph", 2.5, 1.5, "2vh");
+    this.animate();
   }
 };
 </script>
@@ -134,143 +129,103 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/main.scss";
 
-@keyframes animate {
-  0% {
-    transform: translateY(-6rem);
-    opacity: 0.5;
-  }
-  35%,
-  65% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(6rem);
-    opacity: 0;
-  }
-}
+$font-fullhd-p: $font-fullhd / 5;
 
 .landing-page {
-  max-width: 100vw;
+  width: 100vw;
   height: 100vh;
-  background-color: $black;
-  color: $light-gray;
-  z-index: 1;
-  &__slideshow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-  }
   &__title {
     position: absolute;
-    top: 9rem;
+    top: 15vh;
     display: flex;
     flex-direction: column;
+    width: 90%;
     text-transform: uppercase;
-    width: 75%;
+    line-height: 110%;
+    z-index: 1;
     @media only screen and (min-width: $tablet) {
-      top: 15rem;
+      font-size: $font-tablet;
     }
-    @media only screen and (min-width: $desktop) {
-      top: 12vh;
-    }
-
-    &__word-wrapper {
-      margin: 0 0.1rem;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-      height: 0.9em;
-      &:last-of-type {
-        margin-top: 2.5rem;
-      }
+    @media only screen and (min-width: $desktop + 10) {
+      top: 20vh;
+      left: 10vw;
+      font-size: $font-fullhd;
     }
     &__word {
       padding: 0;
-      position: absolute;
-      z-index: 5;
     }
   }
-  &__date {
+
+  &__slideshow {
     position: absolute;
-    bottom: 5%;
-    margin: 0;
-    padding: 0;
-    font-size: 2em;
+    top: 31vh;
+    left: $margin-mobile;
+    width: calc(100vw - 3rem);
+    height: 60vh;
     @media only screen and (min-width: $tablet) {
-      font-size: 2.25em;
+      top: 32.5vh;
+      left: calc(40vw - 3rem);
+      width: 60vw;
     }
-    @media only screen and (min-width: $desktop) {
-      bottom: 3.5rem;
-    }
-  }
-  &__paragraph {
-    position: absolute;
-    top: 55%;
-    @media only screen and (min-width: $fullhd) {
-      top: 45%;
+    @media only screen and (min-width: $desktop + 10) {
+      top: $margin-fullhd;
+      left: 45vw;
+      width: 30vw;
+      height: calc(100vh - 2rem);
     }
   }
-  &__arrow-container {
+  &__scroll-wrapper {
     position: absolute;
-    right: calc(2rem + 0.625rem / 2);
-    bottom: 4%;
-    width: 2rem;
-    height: 4rem;
+    right: $margin-mobile;
+    bottom: $margin-mobile;
+    transform: rotate(-180deg);
+    width: 1.5rem;
+    min-height: 7rem;
+    font-weight: bold;
+    font-size: $font-mobile / 5;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
     overflow: hidden;
     @media only screen and (min-width: $tablet) {
-      right: calc(3rem + 0.625rem / 2);
+      bottom: $margin-tablet;
+      left: $margin-tablet;
+      min-height: 12rem;
+      font-size: $font-tablet / 5;
     }
-    @media only screen and (min-width: $desktop) {
-      right: calc(50% - 1rem);
-      bottom: 3.5rem;
+    @media only screen and (min-width: $desktop + 10) {
+      bottom: $margin-fullhd;
+      left: calc(26vw - 0.75rem);
+      min-height: $font-fullhd * 2;
+      font-size: $font-fullhd / 5;
+      font-weight: normal;
     }
   }
-  &__arrow {
+  &__scroll {
     position: absolute;
-    left: calc(50% - (0.25rem / 4));
-    width: calc(0.25rem / 2);
-    height: 3rem;
-    background-color: $light-gray;
-    animation: animate 4.25s infinite 4.25s;
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      top: 75%;
-      width: 100%;
-      height: 30%;
-      background-color: $white;
-    }
-    &::before {
-      left: calc(0.55rem / 2);
-      transform: rotate(45deg);
-    }
-    &::after {
-      right: calc(0.55rem / 2);
-      transform: rotate(-45deg);
-    }
   }
   &__social-media {
     &__list {
       position: absolute;
-      right: $margin-tablet;
-      bottom: 5%;
+      right: -0.5rem;
+      bottom: 0.25rem;
       display: flex;
-      transform: rotate(-180deg);
       z-index: 99999;
+      margin: 0;
+      padding: 0;
+      transform: rotate(-180deg);
       writing-mode: vertical-rl;
       letter-spacing: 0.05rem;
-      @media only screen and (min-width: $desktop) {
-        bottom: 3.5rem;
+      a {
+        color: $black !important;
+      }
+      @media only screen and (max-width: $desktop + 9) {
+        visibility: hidden;
       }
     }
     &__list-item {
-      padding: 0.5rem;
-      font-size: 0.7em;
+      margin: 0;
+      padding: 0.75rem 1.5rem;
+      font-size: $font-fullhd-p;
       cursor: pointer;
     }
   }
