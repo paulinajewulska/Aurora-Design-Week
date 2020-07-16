@@ -43,7 +43,12 @@ export default {
 
 .FAQ {
   &__title {
-    padding: 3rem 0;
+    padding: 1rem 0 4rem;
+    font-size: 3rem;
+    @media only screen and (min-width: $tablet) {
+      padding: 0 0 6rem;
+      font-size: 4rem;
+    }
   }
   &__questions-wrapper {
     display: flex;

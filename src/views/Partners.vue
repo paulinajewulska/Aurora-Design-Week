@@ -3,7 +3,7 @@
     class="partners"
     @mouseover="changeCursor({ color: 'black', hover: false })"
   >
-    <app-subtitle :subtitle="this.name"></app-subtitle>
+    <h2 class="partners__title">{{ name }}</h2>
     <p class="partners__paragraph">
       Thanks everyone partners for helping make Aurora Design Week happen!
     </p>
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import Subtitle from "../components/Others/Subtitle.vue";
 import { mapActions } from "vuex";
 
 export default {
@@ -49,9 +48,6 @@ export default {
   },
   methods: {
     ...mapActions(["changeCursor"])
-  },
-  components: {
-    AppSubtitle: Subtitle
   }
 };
 </script>
@@ -60,25 +56,62 @@ export default {
 @import "../sass/main.scss";
 
 .partners {
+  &__title {
+    padding: 2rem 0;
+    font-size: 3rem;
+  }
   &__paragraph {
     margin: 1rem 0;
-    text-align: right;
+    @media only screen and (min-width: $tablet) {
+      font-size: 1.75rem;
+    }
   }
   &__list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     margin: 3rem auto 2rem;
     @media only screen and (min-width: $tablet) {
       margin: 4rem auto 3rem;
     }
     @media only screen and (min-width: $desktop) {
-      margin: 5rem auto;
+      justify-content: center;
+      margin: 7rem auto;
     }
     &__item {
-      margin: 1rem;
+      margin: 0.75rem;
+      width: 27%;
+      height: auto;
+      &:nth-child(3n - 2) {
+        margin-left: 0;
+      }
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      @media only screen and (min-width: $tablet) {
+        margin: 1rem;
+        width: 25%;
+        &:nth-child(3n - 2) {
+          margin-left: 1rem;
+        }
+        &:nth-child(3n) {
+          margin-right: 1rem;
+        }
+        img {
+          display: block;
+          margin: auto;
+        }
+      }
       @media only screen and (min-width: $desktop) {
-        margin: 2rem;
+        width: 10%;
+        margin: 1.5rem;
+        &:nth-child(3n - 2) {
+          margin-left: 1.5rem;
+        }
+        &:nth-child(3n) {
+          margin-right: 1.5rem;
+        }
       }
     }
   }

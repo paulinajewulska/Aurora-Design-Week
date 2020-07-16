@@ -315,15 +315,7 @@ export default new Vuex.Store({
           "If you can’t make those dates, or can’t get the time off work, keep an eye on this site. We’re constantly updating our schedule with new Masterclasses, all over the world. So chances are, there’ll be another Masterclass popping up near you soon."
       }
     ],
-    menu: [
-      "home",
-      "about",
-      "calendar",
-      "speakers",
-      "partners",
-      "faq",
-      "contact"
-    ],
+    menu: ["home", "calendar", "speakers", "partners", "faq", "contact"],
     speakers: [
       {
         name: "Nnamdi",

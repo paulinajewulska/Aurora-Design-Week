@@ -17,9 +17,11 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/main.scss";
 .subtitle {
-  padding-bottom: 2rem;
+  font-size: $font-mobile / 1.25;
+  margin: 4rem 0 3rem;
   @media only screen and (min-width: $desktop) {
-    padding-bottom: 3rem;
+    font-size: $font-fullhd / 1.25;
+    margin: 5rem 0 6rem;
   }
   color: $black;
   text-align: left;
