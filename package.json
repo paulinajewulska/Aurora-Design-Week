@@ -8,8 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "deploy": "git push -f heroku master",
-    "heroku-postbuild": "npm run build",
-    "start": "node src/services/server.js"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "buefy": "^0.8.12",
