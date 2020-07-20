@@ -5,74 +5,72 @@
     <form
       method="post"
       class="contact__form"
-      @submit.prevent="sendQuestion"
+      @submit.prevent="sendMessage"
       novalidate
     >
       <input
         type="text"
-        v-model="questionForm.name"
+        v-model="messageForm.name"
         class="contact__form__input"
-        placeholder="Name"
+        placeholder="Your name"
       />
       <input
         type="email"
-        v-model="questionForm.email"
+        v-model="messageForm.email"
         class="contact__form__input"
         placeholder="YourEmail123@email.com"
       />
       <textarea
-        v-model="questionForm.question"
-        class="contact__form__question"
-        placeholder="Question"
+        v-model="messageForm.message"
+        class="contact__form__message"
+        placeholder="Message"
       ></textarea>
-      <p v-if="validationError" class="contact__form__error">
-        {{ validationError }}
-      </p>
+      <p class="contact__form__error">{{ validationError }}</p>
       <button
         class="contact__button"
         type="submit"
         @mousemove="changeCursor({ color: 'red', hover: true })"
         @mouseleave="changeCursor({ color: 'red', hover: false })"
       >
-        SEND
+        Send question
       </button>
     </form>
   </div>
 </template>
 
 <script>
-import { sendQuestion } from "../../../firebaseConfig";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "ContactApplication",
   data: function() {
     return {
-      questionForm: {
+      messageForm: {
         name: "",
         email: "",
-        question: "",
+        message: "",
         error: ""
       }
     };
   },
   computed: {
+    ...mapGetters(["getBaseURL"]),
     validationError: {
       get: function() {
-        return this.questionForm.error;
+        return this.messageForm.error;
       },
       set: function(error) {
-        this.questionForm.error = error;
+        this.messageForm.error = error;
       }
     }
   },
   methods: {
     ...mapActions(["changeCursor"]),
-    sendQuestion(e) {
+    sendMessage(e) {
       e.preventDefault();
-      const name = this.questionForm.name.trim();
-      const email = this.questionForm.email.trim();
-      const question = this.questionForm.question.trim();
+      const name = this.messageForm.name.trim();
+      const email = this.messageForm.email.trim();
+      const message = this.messageForm.message.trim();
       this.validationError = "";
       if (!name) {
         this.validationError = "Please enter your name";
@@ -89,18 +87,27 @@ export default {
         }
       }
 
-      if (!question) {
+      if (!message) {
         this.validationError = "Please enter your question";
         return;
       }
-      sendQuestion(name, email, question);
-      this.questionForm.name = "";
-      this.questionForm.email = "";
-      this.questionForm.question = "";
+      this.addMessage(name, email, message);
+      this.messageForm.name = "";
+      this.messageForm.email = "";
+      this.messageForm.message = "";
     },
     validateEmail(email) {
-      const val = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      return val.test(String(email).toLowerCase());
+      return this.$emit("validate-email", email);
+    },
+    addMessage(name, email, message) {
+      const data = { name, email, question: message };
+      fetch(`${this.getBaseURL}/message`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).catch(error => console.error("Error:", error));
     }
   }
 };
@@ -111,12 +118,15 @@ export default {
 
 .contact {
   &__message {
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
+    @media only screen and (min-width: $desktop) {
+      margin: 0 auto;
+    }
     form {
-      margin: 1rem 0 0.5rem;
+      margin: 0 0 0.5rem;
       @media only screen and (min-width: $tablet) {
-        margin: 0 0 3rem;
+        margin: 0;
       }
     }
   }
@@ -125,18 +135,24 @@ export default {
     flex-wrap: wrap;
     flex-direction: column;
     &__input,
-    &__question {
+    &__message {
       width: 90%;
       height: 1.75rem;
       margin: 0.25rem 0;
       border: none;
-      border-bottom: 1px solid $white;
+      border-bottom: 1px solid $black;
       background-color: transparent;
-      color: $white;
+      color: $black;
       font-size: 0.75rem;
       letter-spacing: 0.05rem;
+      @media only screen and (min-width: $tablet) {
+        margin: 0.4rem 0;
+      }
+      @media only screen and (min-width: $desktop) {
+        margin: 0.55rem 0;
+      }
     }
-    &__question {
+    &__message {
       height: 3.5rem;
     }
     &__error {
@@ -144,16 +160,18 @@ export default {
       font-size: 0.75rem;
       color: $red;
       letter-spacing: 0.05rem;
+      min-height: 1.5rem;
+      width: 70%;
     }
   }
   &__button {
     width: fit-content;
-    margin: 1.75rem 0;
+    margin: 1rem 0 1rem;
     padding: 0;
     border: none;
-    border-bottom: 1px solid $white;
+    border-bottom: 1px solid $black;
     background-color: transparent;
-    color: $white;
+    color: $black;
     cursor: pointer;
     z-index: 99999;
   }

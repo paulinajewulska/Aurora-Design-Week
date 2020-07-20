@@ -21,6 +21,7 @@ export default new Vuex.Store({
   state: {
     cursorHover: false,
     cursorColor: "red",
+    baseURL: "https://aurora-design-week-server.herokuapp.com",
     months: [
       {
         name: "June",
@@ -315,7 +316,7 @@ export default new Vuex.Store({
           "If you can’t make those dates, or can’t get the time off work, keep an eye on this site. We’re constantly updating our schedule with new Masterclasses, all over the world. So chances are, there’ll be another Masterclass popping up near you soon."
       }
     ],
-    menu: ["home", "calendar", "speakers", "partners", "faq", "contact"],
+    menu: ["home", "calendar", "speakers", "faq", "contact"],
     speakers: [
       {
         name: "Nnamdi",
@@ -362,6 +363,9 @@ export default new Vuex.Store({
     ]
   },
   getters: {
+    getBaseURL: state => {
+      return state.baseURL;
+    },
     getMonthNames: state => {
       return state.months.map(months => months.name);
     },
@@ -398,8 +402,7 @@ export default new Vuex.Store({
     changeCursor: ({ commit }, payload) => {
       commit("changeCursor", payload);
     }
-  },
-  modules: {}
+  }
 });
 
 export const store = Vue.observable({
