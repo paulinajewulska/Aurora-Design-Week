@@ -14,7 +14,8 @@
           :key="day.id"
           :date="day.day"
           :place="day.place"
-          :time="day.time"
+          :start="day.start"
+          :end="day.end"
           :month="monthName"
         ></app-calendar-day>
       </div>

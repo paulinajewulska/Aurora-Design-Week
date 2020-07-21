@@ -3,7 +3,7 @@
     class="calendar"
     @mouseover="changeCursor({ color: 'black', hover: false })"
   >
-    <app-subtitle :subtitle="this.name"></app-subtitle>
+    <h1 class="calendar__title">{{ name }}</h1>
     <div
       class="calendar__months"
       v-for="month in getMonthNames"
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import Subtitle from "../components/Others/Subtitle.vue";
 import CalendarMonth from "../components/Calendar/CalendarMonth.vue";
 import { mapGetters, mapActions } from "vuex";
 
@@ -30,8 +29,10 @@ export default {
   methods: {
     ...mapActions(["changeCursor"])
   },
+  beforeCreate() {
+    this.$store.dispatch("loadShows");
+  },
   components: {
-    AppSubtitle: Subtitle,
     AppCalendarMonth: CalendarMonth
   }
 };
@@ -39,4 +40,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "../sass/main.scss";
+.calendar {
+  &__title {
+    padding: 1rem 0 4rem;
+    font-size: 3rem;
+    @media only screen and (min-width: $tablet) {
+      padding: 0 0 6rem;
+      font-size: 4rem;
+    }
+  }
+}
 </style>

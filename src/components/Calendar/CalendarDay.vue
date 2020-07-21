@@ -7,17 +7,14 @@
     :to="{
       name: 'event',
       params: {
-        month: month,
-        event: `${date}-${place}`,
-        date: date,
-        place: place,
-        time: time
+        month: month.toLowerCase(),
+        date: `${date}`
       }
     }"
   >
     <p class="calendar__month__day__date">{{ date }}</p>
     <p class="calendar__month__day__place">{{ place }}</p>
-    <p class="calendar__month__day__time">{{ time }}</p>
+    <p class="calendar__month__day__time">{{ start }} - {{ end }}</p>
   </router-link>
 </template>
 
@@ -32,14 +29,18 @@ export default {
   },
   props: {
     date: {
-      type: String,
+      type: Number,
       required: true
     },
     place: {
       type: String,
       required: true
     },
-    time: {
+    start: {
+      type: String,
+      required: true
+    },
+    end: {
       type: String,
       required: true
     },

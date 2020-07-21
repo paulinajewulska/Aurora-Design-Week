@@ -7,7 +7,6 @@ import Event from "@/views/Event.vue";
 import BuyTicket from "@/views/BuyTicket.vue";
 import Speakers from "@/views/Speakers.vue";
 import Speaker from "@/views/Speaker.vue";
-import Partners from "@/views/Partners.vue";
 import FAQ from "@/views/FAQ.vue";
 import Contact from "@/views/Contact.vue";
 import UnknownRoute from "@/views/404.vue";
@@ -18,9 +17,9 @@ const routes = [
   { path: "/", component: OpeningPage },
   { path: "/home", redirect: "/" },
   { path: "/about", component: About },
-  { path: "/calendar", component: Calendar },
+  { path: "/calendar", component: Calendar, name: "calendar" },
   {
-    path: "/calendar/:month/:event",
+    path: "/calendar/:month/:date",
     component: Event,
     name: "event",
     props: true
@@ -32,7 +31,6 @@ const routes = [
     props: true
   },
   { path: "/speakers", component: Speakers, name: "speakers" },
-  { path: "/partners", component: Partners },
   { path: "/speakers/:nameSurname", component: Speaker, name: "speaker" },
   { path: "/faq", component: FAQ },
   { path: "/contact", component: Contact },
