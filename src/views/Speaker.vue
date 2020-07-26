@@ -1,35 +1,15 @@
 <template>
-  <section
-    class="speaker"
-    @mouseover="changeCursor({ color: 'black', hover: false })"
-  >
-    <div class="speaker__image-wrapper">
-      <v-lazy-image
-        class="speaker__image"
-        :src="getSpeaker($route.params.name, $route.params.surname).image"
-      />
-      <h2
-        class="speaker__title column is-12-mobile is-6-tablet is-6-desktop is-6-fullhd"
-      >
-        <span class="speaker__title__name">{{ $route.params.name }}</span>
-        <span class="speaker__title__surname">{{ $route.params.surname }}</span>
+  <section class="speaker" @mouseover="changeCursor({ color: 'black', hover: false })">
+    <div class="speaker__image-wrapper" v-if="getSpeaker">
+      <v-lazy-image class="speaker__image" :src="getSpeaker.image" v-if="getSpeaker" />
+      <h2 class="speaker__title column is-12-mobile is-6-tablet is-6-desktop is-6-fullhd">
+        <span class="speaker__title__name">{{ name }}</span>
+        <span class="speaker__title__surname">{{ surname }}</span>
       </h2>
     </div>
-    <div class="speaker__below-image">
+    <div class="speaker__below-image" v-if="getSpeaker">
       <div class="speaker__line"></div>
-      <p class="speaker__info">
-        Nam ut libero lectus. Nulla viverra leo diam, sit amet viverra sapien
-        mollis eget. Orci varius natoque penatibus et magnis dis parturient
-        montes, nascetur ridiculus mus. Fusce accumsan urna aliquam tellus
-        porttitor, ultricies tempus orci molestie. Morbi a porta ligula.
-        Vestibulum eget tortor eros. Cras ullamcorper in neque sit amet tempor.
-        Morbi ac consectetur felis. Vestibulum dictum, urna non lobortis
-        aliquam, lacus enim varius libero, ut ultricies sem augue id lectus. Sed
-        commodo ac purus vitae bibendum. Donec gravida, turpis sed commodo
-        mattis, nibh est venenatis nisl, non vehicula lectus libero in odio.
-        Cras auctor faucibus consectetur. Nam non tellus placerat, vulputate
-        quam vel, vulputate erat.
-      </p>
+      <p class="speaker__info">{{ getSpeaker.description[0] }}</p>
       <router-link
         class="speaker__button column is-12-mobile is-12-tablet is-12-desktop is-12-fullhd"
         v-if="!isMenuOpen"
@@ -38,22 +18,28 @@
         :to="{
           name: 'speakers'
         }"
-        >Go back to the speakers</router-link
-      >
+      >Go back to the speakers</router-link>
     </div>
   </section>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import { store } from "../store/index.js";
 
 export default {
   name: "speaker",
   data: function() {
     return {
-      vm: this
+      vm: this,
+      name: "",
+      surname: ""
     };
+  },
+  props: {
+    nameSurname: {
+      type: String
+    }
   },
   computed: {
     ...mapGetters(["getSpeaker"]),
@@ -61,8 +47,22 @@ export default {
       return store.isNavOpen;
     }
   },
+  created() {
+    const [name, surname] = this.nameSurname.split("-");
+    this.name = name;
+    this.name = name;
+    this.surname = surname;
+    this.$store.dispatch("loadSpeaker", {
+      name: this.name,
+      surname: this.surname
+    });
+  },
+  destroyed() {
+    this.saveSpeaker("");
+  },
   methods: {
-    ...mapActions(["changeCursor"])
+    ...mapActions(["changeCursor"]),
+    ...mapMutations(["saveSpeaker"])
   }
 };
 </script>
@@ -92,16 +92,17 @@ export default {
     width: 65vw;
     height: auto;
     margin: 12.5vh auto 0;
+    background-color: $black;
     @media only screen and (min-width: $tablet) {
       width: 50%;
       margin: 10vh 0 0 7.5vw;
     }
     @media only screen and (min-width: $desktop) {
       position: absolute;
-      top: $margin-fullhd;
-      left: 10vw;
-      width: 30vw;
-      height: calc(100vh - 2rem);
+      top: 0;
+      left: 0;
+      width: 40vw;
+      height: 100vh;
       margin: 0;
     }
   }
@@ -139,7 +140,6 @@ export default {
       &__surname {
         position: absolute;
         top: 4rem;
-        left: 15vw;
         width: auto;
       }
     }
@@ -155,7 +155,7 @@ export default {
     }
     @media only screen and (min-width: $desktop) {
       position: absolute;
-      bottom: 1rem;
+      bottom: $padding-fullhd/2;
       left: 45vw;
       width: 45vw;
       margin-bottom: 0;

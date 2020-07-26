@@ -31,7 +31,12 @@ const routes = [
     props: true
   },
   { path: "/speakers", component: Speakers, name: "speakers" },
-  { path: "/speakers/:nameSurname", component: Speaker, name: "speaker" },
+  {
+    path: "/speakers/:nameSurname",
+    component: Speaker,
+    name: "speaker",
+    props: true
+  },
   { path: "/faq", component: FAQ },
   { path: "/contact", component: Contact },
   { path: "*", component: UnknownRoute }

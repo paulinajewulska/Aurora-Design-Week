@@ -4,17 +4,9 @@
     @mouseover="changeCursor({ color: 'black', hover: false })"
     @mouseenter="setInitialImagePosition"
   >
-    <app-subtitle :subtitle="this.name"></app-subtitle>
-    <ul
-      class="speakers__list"
-      @mousemove="moveImage"
-      @mouseleave="cursorOnList = false"
-    >
-      <li
-        v-for="speaker in speakers"
-        :key="speaker.name"
-        class="speakers__list-item"
-      >
+    <h1 v-if="$route.path === '/speakers'" class="speakers__title">{{ name }}</h1>
+    <ul class="speakers__list" @mousemove="moveImage" @mouseleave="cursorOnList = false">
+      <li v-for="speaker in speakers" :key="speaker.name" class="speakers__list-item">
         <router-link
           class="speakers__router-link"
           @mousemove.native="
@@ -51,8 +43,7 @@
 </template>
 
 <script>
-import Subtitle from "../components/Others/Subtitle.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Speakers",
@@ -65,11 +56,11 @@ export default {
       imageHeightCenter: 0,
       imageWidthCenter: 0,
       vm: this,
-      imagePath: "",
-      speakers: this.$store.state.speakers
+      imagePath: ""
     };
   },
   computed: {
+    ...mapGetters({ speakers: "getSpeakers" }),
     cursorOnList: {
       get: function() {
         return this.isCursorOnList;
@@ -100,20 +91,20 @@ export default {
       this.yPhotoCenterPosition = e.clientY;
     },
     setInitialImagePosition() {
-      const x = document.querySelector(".speakers__list-item").offsetTop;
-      const y = document.querySelector(".speakers__list-item").offsetLeft;
-      const image = document.querySelector(".speakers__image");
-      this.imageHeightCenter = this.$refs.image.clientHeight / 2;
-      this.imageWidthCenter = this.$refs.image.clientWidth / 2;
-      this.xPhotoCenterPosition = x - this.imageHeightCenter;
-      this.yPhotoCenterPosition = y - this.imageWidthCenter;
-      image.style.top = `${x - this.imageHeightCenter}px`;
-      image.style.left = `${y - this.imageWidthCenter}px`;
-      this.imageSrcPath = this.speakers[0].image;
+      const item = document.querySelector(".speakers__list-item");
+      if (item) {
+        const x = item.offsetTop;
+        const y = item.offsetLeft;
+        const image = document.querySelector(".speakers__image");
+        this.imageHeightCenter = this.$refs.image.clientHeight / 2;
+        this.imageWidthCenter = this.$refs.image.clientWidth / 2;
+        this.xPhotoCenterPosition = x - this.imageHeightCenter;
+        this.yPhotoCenterPosition = y - this.imageWidthCenter;
+        image.style.top = `${x - this.imageHeightCenter}px`;
+        image.style.left = `${y - this.imageWidthCenter}px`;
+        this.imageSrcPath = this.speakers[0].image;
+      }
     }
-  },
-  components: {
-    AppSubtitle: Subtitle
   }
 };
 </script>
@@ -127,10 +118,19 @@ $circle-size-desktop: 3.2rem;
 
 .speakers {
   min-height: 100vh;
+  &__title {
+    padding: 1rem 0 4rem;
+    font-size: 3rem;
+    @media only screen and (min-width: $tablet) {
+      padding: 0 0 6rem;
+      font-size: 4rem;
+    }
+  }
   &__router-link {
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     width: fit-content;
     color: $black;
     text-transform: uppercase;
@@ -145,13 +145,18 @@ $circle-size-desktop: 3.2rem;
     }
   }
   &__list {
-    width: fit-content;
+    width: 100%;
+    @media only screen and (min-width: $desktop) {
+      padding: 0 10vw 15vh 0;
+    }
     &-item {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       margin: 1rem 0;
       font-size: 2.2rem;
       line-height: 2rem;
+      width: 100%;
       @media only screen and (min-width: $tablet) {
         margin: 0;
         font-size: 3.5rem;

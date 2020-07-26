@@ -31,45 +31,46 @@ export default new Vuex.Store({
         name: "Nnamdi",
         surname: "Obgonnaya",
         country: "AU",
-        image: require("../assets/Speakers/jard-rusticus-Ib-4pQtdHt0-unsplash-min.jpg")
+        image: require("../assets/speakers/jard-rusticus-Ib-4pQtdHt0-unsplash-min.jpg")
       },
       {
         name: "Kweku",
         surname: "Collins",
         country: "BE",
-        image: require("../assets/Speakers/brian-lundquist-DwGIBfqLxno-unsplash-min.jpg")
+        image: require("../assets/speakers/brian-lundquist-DwGIBfqLxno-unsplash-min.jpg")
       },
       {
         name: "Kelly",
         surname: "Owens",
         country: "AU",
-        image: require("../assets/Speakers/andrey-zvyagintsev-3paYH1ewz3s-unsplash-min.jpg")
+        image: require("../assets/speakers/andrey-zvyagintsev-3paYH1ewz3s-unsplash-min.jpg")
       },
       {
         name: "Alex",
         surname: "Cameron",
         country: "JP",
-        image: require("../assets/Speakers/denis-agati--5Vl9oimYlU-unsplash-min.jpg")
+        image: require("../assets/speakers/denis-agati--5Vl9oimYlU-unsplash-min.jpg")
       },
       {
         name: "Korean",
         surname: "breakfast",
         country: "ES",
-        image: require("../assets/Speakers/levi-clancy-WE0gt7t4o2k-unsplash-min.jpg")
+        image: require("../assets/speakers/levi-clancy-WE0gt7t4o2k-unsplash-min.jpg")
       },
       {
         name: "Smino",
         surname: "Williams",
         country: "AU",
-        image: require("../assets/Speakers/thomas-mowe-cG-A0o4zV1w-unsplash-min.jpg")
+        image: require("../assets/speakers/thomas-mowe-cG-A0o4zV1w-unsplash-min.jpg")
       },
       {
         name: "Josiah",
         surname: "Faulkner",
         country: "US",
-        image: require("../assets/Speakers/fayiz-musthafa-yGqsr6EVrGw-unsplash-min.jpg")
+        image: require("../assets/speakers/fayiz-musthafa-yGqsr6EVrGw-unsplash-min.jpg")
       }
-    ]
+    ],
+    speaker: ""
   },
   getters: {
     getBaseURL: state => {
@@ -81,16 +82,17 @@ export default new Vuex.Store({
     getEvents: state => month => {
       return state.shows.filter(event => event.month === month);
     },
-    getSpeaker: state => (name, surname) => {
-      return state.speakers.find(
-        speaker => speaker.name === name && speaker.surname === surname
-      );
-    },
     getEventPerformances: state => {
       return state.performances[0].performances;
     },
     getEventData: state => {
       return state.performances[0];
+    },
+    getSpeakers: state => {
+      return state.speakers;
+    },
+    getSpeaker: state => {
+      return state.speaker;
     }
   },
   mutations: {
@@ -109,6 +111,12 @@ export default new Vuex.Store({
     },
     savePerformances(state, performances) {
       state.performances = performances;
+    },
+    saveSpeakers(state, speakers) {
+      state.speakers = speakers;
+    },
+    saveSpeaker(state, speaker) {
+      state.speaker = speaker;
     }
   },
   actions: {
@@ -147,6 +155,29 @@ export default new Vuex.Store({
       );
       const performances = await response.json();
       commit("savePerformances", performances);
+    },
+    loadSpeakers: async ({ commit, state }) => {
+      const response = await fetch(`${state.baseURL}/speakers`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      });
+      const speakers = await response.json();
+      commit("saveSpeakers", speakers);
+    },
+    loadSpeaker: async ({ commit, state }, payload) => {
+      const response = await fetch(
+        `${state.baseURL}/speakers/${payload.name}-${payload.surname}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          }
+        }
+      );
+      const speaker = await response.json();
+      commit("saveSpeaker", speaker);
     }
   }
 });
