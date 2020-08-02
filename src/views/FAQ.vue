@@ -1,5 +1,8 @@
 <template>
-  <section class="FAQ" @mouseover="changeCursor({ color: 'black', hover: false })">
+  <section
+    class="FAQ"
+    @mouseover="changeCursor({ color: 'black', hover: false })"
+  >
     <h1 class="FAQ__title">{{ name }}</h1>
     <div class="FAQ__questions-wrapper">
       <app-f-a-q-question
@@ -7,7 +10,7 @@
         :key="question.id"
         :question="question.question"
         :answer="question.answer"
-      >}}</app-f-a-q-question>
+      ></app-f-a-q-question>
     </div>
   </section>
 </template>
@@ -26,10 +29,10 @@ export default {
   },
   computed: { ...mapState(["questions"]) },
   methods: {
-    ...mapActions(["changeCursor"]),
-    beforeCreate() {
-      this.$store.dispatch("loadQuestions");
-    }
+    ...mapActions(["changeCursor"])
+  },
+  beforeCreate() {
+    this.$store.dispatch("loadQuestions");
   },
   components: {
     AppFAQQuestion: FAQQuestion
