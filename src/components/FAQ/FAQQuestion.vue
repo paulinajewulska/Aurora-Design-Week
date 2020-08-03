@@ -72,6 +72,7 @@ $circle-size-desktop: 1.5rem;
     display: flex;
     align-items: baseline;
     width: 100%;
+    height: auto;
     font-size: 0.95rem;
     @media only screen and (min-width: $desktop) {
       flex-wrap: wrap;
@@ -104,6 +105,7 @@ $circle-size-desktop: 1.5rem;
     }
     &__text {
       width: fit-content;
+      min-height: 10vh;
     }
   }
 }

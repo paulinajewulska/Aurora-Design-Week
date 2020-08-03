@@ -27,7 +27,7 @@
       ></textarea>
       <p class="contact__form__error">{{ validationError }}</p>
       <button
-        class="contact__button"
+        class="contact__message__button"
         type="submit"
         @mousemove="changeCursor({ color: 'red', hover: true })"
         @mouseleave="changeCursor({ color: 'red', hover: false })"
@@ -164,7 +164,7 @@ export default {
       width: 70%;
     }
   }
-  &__button {
+  &__message__button {
     width: fit-content;
     margin: 1rem 0 1rem;
     padding: 0;

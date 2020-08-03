@@ -12,12 +12,12 @@ body {
 }
 
 section {
-  padding: 1.5rem;
+  padding: $margin-mobile;
   @media only screen and (min-width: $tablet) {
-    padding: $padding-tablet;
+    padding: $margin-tablet;
   }
   @media only screen and (min-width: $desktop) {
-    padding: $padding-fullhd / 2 $padding-tablet;
+    padding: $margin-fullhd $margin-fullhd * 2;
   }
 }
 

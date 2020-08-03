@@ -14,8 +14,9 @@ WebFont.load({
 });
 
 import { VLazyImagePlugin } from "v-lazy-image";
-
 Vue.use(VLazyImagePlugin);
+import vueTripWire from "vue-trip-wire";
+Vue.use(vueTripWire);
 
 export default new Vuex.Store({
   state: {

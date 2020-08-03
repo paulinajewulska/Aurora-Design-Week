@@ -2,13 +2,14 @@
   <section
     class="contact"
     @mouseover="changeCursor({ color: 'red', hover: false })"
+    v-trip-wire="{ pos: 0.2, func: animate }"
   >
     <div class="contact__wrapper">
       <p
         class="contact__application__paragraph column is-12-mobile is-6-tablet is-5-desktop is-5-fullhd"
       >
-        Are you a designer, artist, creative, or a de facto art criminal? Join
-        us!
+        Are you a designer, artist, creative, or a de facto art criminal?
+        <span class="contact__application__paragraph--strong">Join us!</span>
       </p>
       <app-contact-application
         @validate-email="validateEmail"
@@ -18,7 +19,8 @@
       <p
         class="contact__message__paragraph column is-12-mobile is-6-tablet is-5-desktop is-5-fullhd"
       >
-        Or just say hello!
+        Or just say
+        <span class="contact__message__paragraph--strong">hello!</span>
       </p>
       <app-contact-message
         @validate-email="validateEmail"
@@ -31,6 +33,7 @@
 import ContactApplication from "../components/Contact/ContactApplication.vue";
 import ContactMessage from "../components/Contact/ContactMessage.vue";
 import { mapActions } from "vuex";
+import { gsap } from "gsap";
 
 export default {
   name: "Contact",
@@ -45,6 +48,36 @@ export default {
     validateEmail(email) {
       const val = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       return val.test(String(email).toLowerCase());
+    },
+    animate() {
+      gsap.to("body", 0, { css: { visibility: "visible" } });
+
+      const paragraphs = [
+        document.querySelector(".contact__application__paragraph"),
+        document.querySelector(".contact__message__paragraph")
+      ];
+
+      const tl = gsap.timeline();
+      tl.staggerFromTo(
+        paragraphs,
+        1, // duration
+        {
+          y: 75,
+          opacity: 0,
+          ease: "power3.out",
+          skewY: 2,
+          stagger: {
+            amount: 0.3
+          }
+        },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "power3.out",
+          skewY: 0
+        },
+        0.5 // delay
+      );
     }
   },
   components: {
@@ -86,12 +119,16 @@ export default {
   &__message__paragraph {
     font-size: 1.5rem;
     line-height: 110%;
+    opacity: 0;
+    &--strong {
+      font-size: 110%;
+      font-weight: bold;
+    }
     @media only screen and (min-width: $tablet) {
-      font-size: 3rem;
+      font-size: 2.25rem;
     }
     @media only screen and (min-width: $desktop) {
       height: 50%;
-      font-size: 3.25rem;
     }
   }
   &__application__paragraph {

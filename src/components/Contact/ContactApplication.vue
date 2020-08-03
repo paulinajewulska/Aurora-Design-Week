@@ -29,7 +29,7 @@
       />
       <p class="contact__form__error">{{ validationError }}</p>
       <button
-        class="contact__button"
+        class="contact__application__button"
         type="submit"
         @mousemove="changeCursor({ color: 'red', hover: true })"
         @mouseleave="changeCursor({ color: 'red', hover: false })"
@@ -173,7 +173,7 @@ export default {
       width: 70%;
     }
   }
-  &__button {
+  &__application__button {
     width: fit-content;
     margin: 1rem 0;
     padding: 0;

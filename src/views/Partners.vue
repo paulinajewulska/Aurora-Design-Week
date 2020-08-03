@@ -2,10 +2,11 @@
   <section
     class="partners"
     @mouseover="changeCursor({ color: 'black', hover: false })"
+    v-trip-wire="{ pos: 0.2, func: animate }"
   >
-    <h2 class="partners__title">{{ name }}</h2>
     <p class="partners__paragraph">
-      Thanks everyone partners for helping make Aurora Design Week happen!
+      <span class="partners__paragraph--strong">Thanks</span> everyone partners
+      for helping make Aurora Design Week happen!
     </p>
     <ul class="partners__list">
       <li
@@ -26,6 +27,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { gsap } from "gsap";
 
 export default {
   name: "partners",
@@ -47,7 +49,34 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["changeCursor"])
+    ...mapActions(["changeCursor"]),
+    animate() {
+      gsap.to("body", 0, { css: { visibility: "visible" } });
+
+      const title = document.querySelectorAll(".partners__paragraph");
+      const tl = gsap.timeline();
+
+      tl.staggerFromTo(
+        title,
+        1, // duration
+        {
+          y: 75,
+          opacity: 0,
+          ease: "power3.out",
+          skewY: 2,
+          stagger: {
+            amount: 0.3
+          }
+        },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "power3.out",
+          skewY: 0
+        },
+        0.5 // delay
+      );
+    }
   }
 };
 </script>
@@ -56,14 +85,25 @@ export default {
 @import "../sass/main.scss";
 
 .partners {
-  &__title {
-    padding: 2rem 0;
-    font-size: 3rem;
+  @media only screen and (min-width: $desktop) {
+    display: flex;
+    align-items: center;
   }
   &__paragraph {
     margin: 1rem 0;
+    opacity: 0;
+    &--strong {
+      font-size: 110%;
+      font-weight: bold;
+    }
     @media only screen and (min-width: $tablet) {
-      font-size: 1.75rem;
+      font-size: 2.25rem;
+    }
+    @media only screen and (min-width: $desktop) {
+      width: 125%;
+    }
+    @media only screen and (min-width: $fullhd) {
+      width: 75%;
     }
   }
   &__list {
