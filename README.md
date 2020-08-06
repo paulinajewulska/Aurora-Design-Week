@@ -2,7 +2,7 @@
 
 Website 
 
-Live: [link](https://aurora-design-week.herokuapp.com)
+Live: [link](https://aurora.jewulska.pl)
 (Recommended browsers: Opera & Chrome)
 
 Created using [this template](https://www.uistore.design/items/aurora-free-web-elements-for-adobe-xd-and-sketch/)
