@@ -22,7 +22,7 @@ export default new Vuex.Store({
   state: {
     cursorHover: false,
     cursorColor: "red",
-    baseURL: "https://aurora-design-week-server.herokuapp.com",
+    baseURL: process.env.VUE_APP_SERVER_URI,
     shows: [],
     performances: "",
     questions: [],
