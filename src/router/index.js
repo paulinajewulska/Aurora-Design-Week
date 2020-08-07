@@ -1,45 +1,39 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import OpeningPage from "@/views/OpeningPage.vue";
-import About from "@/views/About.vue";
-import Calendar from "@/views/Calendar.vue";
-import Event from "@/views/Event.vue";
-import BuyTicket from "@/views/BuyTicket.vue";
-import Speakers from "@/views/Speakers.vue";
-import Speaker from "@/views/Speaker.vue";
-import FAQ from "@/views/FAQ.vue";
-import Contact from "@/views/Contact.vue";
-import UnknownRoute from "@/views/404.vue";
 
 Vue.use(VueRouter);
 
+function lazyLoad(view) {
+  return () => import(`@/views/${view}.vue`);
+}
+
 const routes = [
-  { path: "/", component: OpeningPage },
+  { path: "/", component: lazyLoad("OpeningPage") },
   { path: "/home", redirect: "/" },
-  { path: "/about", component: About },
-  { path: "/calendar", component: Calendar, name: "calendar" },
+  { path: "/about", component: lazyLoad("About") },
+  { path: "/calendar", component: lazyLoad("Calendar"), name: "calendar" },
   {
     path: "/calendar/:month/:date",
-    component: Event,
+    component: lazyLoad("Event"),
     name: "event",
     props: true
   },
   {
     path: "/calendar/:month/:event/buy-ticket",
-    component: BuyTicket,
+    component: lazyLoad("BuyTicket"),
     name: "buyTicket",
     props: true
   },
-  { path: "/speakers", component: Speakers, name: "speakers" },
+  { path: "/speakers", component: lazyLoad("Speakers"), name: "speakers" },
   {
     path: "/speakers/:nameSurname",
-    component: Speaker,
+    component: lazyLoad("Speaker"),
     name: "speaker",
     props: true
   },
-  { path: "/faq", component: FAQ },
-  { path: "/contact", component: Contact },
-  { path: "*", component: UnknownRoute }
+  { path: "/faq", component: lazyLoad("FAQ") },
+  { path: "/contact", component: lazyLoad("Contact") },
+  { path: "*", component: lazyLoad("404") }
 ];
 
 const router = new VueRouter({

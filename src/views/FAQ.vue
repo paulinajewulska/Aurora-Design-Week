@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import FAQQuestion from "../components/FAQ/FAQQuestion.vue";
 import { mapState, mapActions } from "vuex";
+const FAQQuestion = () => import("../components/FAQ/FAQQuestion.vue");
 
 export default {
   name: "FAQ",

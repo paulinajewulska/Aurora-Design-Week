@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import CalendarMonth from "../components/Calendar/CalendarMonth.vue";
 import { mapGetters, mapActions } from "vuex";
+const CalendarMonth = () => import("../components/Calendar/CalendarMonth.vue");
 
 export default {
   name: "Partners",

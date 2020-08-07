@@ -30,10 +30,11 @@
 </template>
 
 <script>
-import ContactApplication from "../components/Contact/ContactApplication.vue";
-import ContactMessage from "../components/Contact/ContactMessage.vue";
 import { mapActions } from "vuex";
 import { gsap } from "gsap";
+const ContactApplication = () =>
+  import("../components/Contact/ContactApplication.vue");
+const ContactMessage = () => import("../components/Contact/ContactMessage.vue");
 
 export default {
   name: "Contact",

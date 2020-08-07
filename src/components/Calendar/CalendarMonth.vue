@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import CalendarDay from "./CalendarDay.vue";
 import { mapGetters } from "vuex";
+const CalendarDay = () => import("./CalendarDay.vue");
 
 export default {
   name: "CalendatMonth",

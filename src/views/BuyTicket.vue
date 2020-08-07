@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import BuyTicketForm from "../components/Calendar/BuyTicketForm.vue";
+const BuyTicketForm = () => import("../components/Calendar/BuyTicketForm.vue");
 import { mapActions } from "vuex";
 
 export default {
