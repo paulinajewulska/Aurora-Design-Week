@@ -14,8 +14,8 @@
       <div class="about__image__wrapper">
         <v-lazy-image
           class="about__image"
-          :src="require('../assets/annie-spratt-C45XqxDRdbU-unsplash.jpg')"
-          alt="People walking on the street"
+          :src="require('../assets/morning-brew-i6vAPunkfgQ-unsplash.jpg')"
+          alt="CN Tower, Toronto, Canada"
         />
         <div class="about__image__cover"></div>
       </div>
@@ -66,11 +66,11 @@ export default {
         },
         0.5 // delay
       );
-      tl.to(imageCover, 1, { top: "100%", ease: "power2.inOut" }, 0.5);
+      tl.to(imageCover, 1, { width: 0, ease: "power2.inOut" }, 0.5);
       tl.from(image, 1.2, {
-        scale: 1.25,
+        scale: 1.6,
         ease: "power3.out",
-        delay: -1
+        delay: -0.8
       });
     }
   }
@@ -105,7 +105,7 @@ export default {
       display: block;
       align-self: center;
       margin: 4rem auto;
-      background-color: $black;
+      background-color: $white;
       overflow: hidden;
     }
     &__cover {

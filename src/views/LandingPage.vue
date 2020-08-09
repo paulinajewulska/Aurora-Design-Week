@@ -83,9 +83,11 @@ export default {
   computed: {
     images() {
       return [
-        require("../assets/LandingPage/mart-pieterman-4XIUmOxP2xQ-unsplash.jpg"),
-        require("../assets/LandingPage/duangphorn-wiriya-zm438klkxU4-unsplash.jpg"),
-        require("../assets/LandingPage/jack-hunter-qKeNO57OxWo-unsplash.jpg")
+        require("../assets/LandingPage/mikita-yo-IO_CWfjXM7U-unsplash.jpg"),
+        require("../assets/LandingPage/nicole-geri-a31khKMmRd0-unsplash.jpg"),
+        require("../assets/LandingPage/crawford-passy-TgCiQgbAS4I-unsplash.jpg"),
+        require("../assets/LandingPage/romain-morel-xh-b4q8Vwd4-unsplash.jpg"),
+        require("../assets/LandingPage/vinicius-amnx-amano-OHPdgstNFGs-unsplash.jpg")
       ];
     },
     isMenuOpen() {
