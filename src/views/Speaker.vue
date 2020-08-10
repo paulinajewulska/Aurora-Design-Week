@@ -1,15 +1,27 @@
 <template>
-  <section class="speaker" @mouseover="changeCursor({ color: 'black', hover: false })">
+  <section
+    class="speaker"
+    @mouseover="changeCursor({ color: 'black', hover: false })"
+  >
     <div class="speaker__image-wrapper" v-if="getSpeaker">
-      <v-lazy-image class="speaker__image" :src="getSpeaker.image" v-if="getSpeaker" />
-      <h2 class="speaker__title column is-12-mobile is-6-tablet is-6-desktop is-6-fullhd">
+      <div class="speaker__image__wrapper">
+        <v-lazy-image
+          class="speaker__image"
+          :src="getSpeaker.image"
+          @load="animateImage"
+        />
+        <div class="speaker__image__cover"></div>
+      </div>
+      <h2
+        class="speaker__title column is-12-mobile is-6-tablet is-6-desktop is-6-fullhd"
+        v-trip-wire="{ pos: 0.2, func: animateText }"
+      >
         <span class="speaker__title__name">{{ name }}</span>
         <span class="speaker__title__surname">{{ surname }}</span>
       </h2>
     </div>
     <div class="speaker__below-image" v-if="getSpeaker">
-      <div class="speaker__line"></div>
-      <p class="speaker__info">{{ getSpeaker.description[0] }}</p>
+      <p class="speaker__info">{{ getSpeaker.description }}</p>
       <router-link
         class="speaker__button column is-12-mobile is-12-tablet is-12-desktop is-12-fullhd"
         v-if="!isMenuOpen"
@@ -18,7 +30,8 @@
         :to="{
           name: 'speakers'
         }"
-      >Go back to the speakers</router-link>
+        >Go back to the speakers</router-link
+      >
     </div>
   </section>
 </template>
@@ -26,6 +39,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { store } from "../store/index.js";
+import { gsap } from "gsap";
 
 export default {
   name: "speaker",
@@ -62,7 +76,42 @@ export default {
   },
   methods: {
     ...mapActions(["changeCursor"]),
-    ...mapMutations(["saveSpeaker"])
+    ...mapMutations(["saveSpeaker"]),
+    animateText() {
+      gsap.to("body", 0, { css: { visibility: "visible" } });
+
+      const title = document.querySelector(".speaker__title");
+      const paragraph = document.querySelector(".speaker__info");
+      const button = document.querySelector(".speaker__button");
+
+      const tl = gsap.timeline();
+      tl.staggerFromTo(
+        [title, paragraph, button],
+        1, // duration
+        {
+          y: 75,
+          opacity: 0,
+          ease: "power3.out",
+          skewY: 2,
+          stagger: {
+            amount: 0.1
+          }
+        },
+        { y: 0, opacity: 1, ease: "power3.out", skewY: 0 },
+        0.2 // delay
+      );
+    },
+    animateImage() {
+      const image = document.querySelectorAll(".speaker__image");
+      const imageCover = document.querySelectorAll(".speaker__image__cover");
+      const tl = gsap.timeline();
+      tl.to(imageCover, 1, { width: 0, ease: "power2.inOut" }, 0.1);
+      tl.from(image, 1.4, {
+        scale: 1.6,
+        ease: "power3.inOut",
+        delay: -1.1
+      });
+    }
   }
 };
 </script>
@@ -77,33 +126,53 @@ export default {
     position: relative;
     top: 0;
     left: 0;
-    width: 100%;
-    height: auto;
+    margin: 0 auto;
     @media only screen and (min-width: $desktop) {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
     }
   }
 
   &__image {
+    position: relative;
+    top: 0;
+    left: 0;
     display: block;
     width: 65vw;
-    height: auto;
-    margin: 12.5vh auto 0;
-    background-color: $black;
-    @media only screen and (min-width: $tablet) {
-      width: 50%;
-      margin: 10vh 0 0 7.5vw;
-    }
+    height: 45vh;
+    margin: 0 auto;
+    background-color: $white;
+    overflow: hidden;
     @media only screen and (min-width: $desktop) {
+      height: 100%;
+    }
+    &__wrapper {
+      display: block;
+      width: fit-content;
+      margin: 10vh auto 0;
+      background-color: $white;
+      overflow: hidden;
+      @media only screen and (min-width: $tablet) {
+        width: 50%;
+        margin: 10vh 0 0 7.5vw;
+      }
+      @media only screen and (min-width: $desktop) {
+        position: absolute;
+        top: $margin-fullhd;
+        left: $margin-fullhd * 2;
+        width: 35vw;
+        height: calc(100vh - 2 * #{$margin-fullhd});
+        margin: 0;
+      }
+    }
+    &__cover {
       position: absolute;
       top: 0;
       left: 0;
-      width: 40vw;
-      height: 100vh;
-      margin: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $white;
     }
   }
 
@@ -116,21 +185,22 @@ export default {
     font-size: 3rem;
     text-transform: uppercase;
     line-height: 4rem;
+    opacity: 0;
     &__name,
     &__surname {
       display: block;
     }
     @media only screen and (min-width: $tablet) {
-      width: 50%;
       bottom: calc(40% - 4rem);
       left: 45vw;
+      width: 50%;
       text-align: left;
       &__name {
         margin-right: 1rem;
       }
     }
     @media only screen and (min-width: $desktop) {
-      top: 20vh;
+      top: 15vh;
       font-size: 5rem;
       &__name {
         position: absolute;
@@ -157,32 +227,25 @@ export default {
       position: absolute;
       bottom: $padding-fullhd/2;
       left: 45vw;
+      display: flex;
+      flex-direction: column;
       width: 45vw;
-      margin-bottom: 0;
-    }
-  }
-
-  &__line {
-    display: block;
-    width: 1px;
-    height: 7.5vh;
-    margin: 1rem auto;
-    background-color: $black;
-    @media only screen and (min-width: $tablet) {
-      display: none;
+      height: calc(100vh - 15vh - 2 * 5rem - 4 * #{$margin-fullhd});
+      margin: 0;
     }
   }
 
   &__info {
     width: 100%;
-    margin: 2rem 0;
+    margin: 1rem 0;
     padding: 0;
     text-align: justify;
+    opacity: 0;
     @media only screen and (min-width: $tablet) {
       margin: 0 0 3rem;
     }
     @media only screen and (min-width: $desktop) {
-      min-height: 40vh;
+      margin: 0 0 auto;
     }
   }
 
@@ -190,11 +253,15 @@ export default {
     width: fit-content;
     border: none;
     border-bottom: 1px solid $black;
-    padding: 0;
+    padding: 1rem 0 0;
     background-color: transparent;
     color: $black;
     cursor: pointer;
     z-index: 99999;
+    opacity: 0;
+    @media only screen and (min-width: $tablet) {
+      padding: 0;
+    }
   }
 }
 </style>
