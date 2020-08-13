@@ -4,6 +4,8 @@
     @mouseover="changeCursor({ color: 'black', hover: false })"
   >
     <h1 class="calendar__title">{{ name }}</h1>
+    <h2 v-if="loading">Loading loading ..</h2>
+    <h2 v-if="error">Oh no! {{ error }}</h2>
     <div
       class="calendar__months"
       v-for="month in getMonthNames"
@@ -21,16 +23,35 @@ const CalendarMonth = () => import("../components/Calendar/CalendarMonth.vue");
 export default {
   name: "Partners",
   data: function() {
-    return { name: "Upcoming shows", vm: this };
+    return {
+      name: "Upcoming shows",
+      vm: this,
+      loading: false,
+      error: null
+    };
   },
   computed: {
     ...mapGetters(["getMonthNames"])
   },
   methods: {
-    ...mapActions(["changeCursor"])
+    ...mapActions(["changeCursor"]),
+    fetchData() {
+      this.error = null;
+      this.loading = true;
+      try {
+        this.$store.dispatch("loadShows");
+      } catch (err) {
+        this.error = err.toString();
+      } finally {
+        this.loading = false;
+      }
+    }
   },
-  beforeCreate() {
-    this.$store.dispatch("loadShows");
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData"
   },
   components: {
     AppCalendarMonth: CalendarMonth

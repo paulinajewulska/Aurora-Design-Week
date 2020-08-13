@@ -4,9 +4,21 @@
     @mouseover="changeCursor({ color: 'black', hover: false })"
     @mouseenter="setInitialImagePosition"
   >
-    <h1 v-if="$route.path === '/speakers'" class="speakers__title">{{ name }}</h1>
-    <ul class="speakers__list" @mousemove="moveImage" @mouseleave="cursorOnList = false">
-      <li v-for="speaker in speakers" :key="speaker.name" class="speakers__list-item">
+    <h1 v-if="$route.path === '/speakers'" class="speakers__title">
+      {{ name }}
+    </h1>
+    <h2 v-if="loading">Loading loading ..</h2>
+    <h2 v-if="error">Oh no! {{ error }}</h2>
+    <ul
+      class="speakers__list"
+      @mousemove="moveImage"
+      @mouseleave="cursorOnList = false"
+    >
+      <li
+        v-for="speaker in speakers"
+        :key="speaker.name"
+        class="speakers__list-item"
+      >
         <router-link
           class="speakers__router-link"
           @mousemove.native="
@@ -56,7 +68,9 @@ export default {
       imageHeightCenter: 0,
       imageWidthCenter: 0,
       vm: this,
-      imagePath: ""
+      imagePath: "",
+      loading: false,
+      error: null
     };
   },
   computed: {
@@ -104,7 +118,24 @@ export default {
         image.style.left = `${y - this.imageWidthCenter}px`;
         this.imageSrcPath = this.speakers[0].image;
       }
+    },
+    fetchData() {
+      this.error = null;
+      this.loading = true;
+      try {
+        this.$store.dispatch("loadSpeakers");
+      } catch (err) {
+        this.error = err.toString();
+      } finally {
+        this.loading = false;
+      }
     }
+  },
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData"
   }
 };
 </script>
@@ -147,7 +178,7 @@ $circle-size-desktop: 3.2rem;
   &__list {
     width: 100%;
     @media only screen and (min-width: $desktop) {
-      padding: 0 10vw 15vh 0;
+      padding: 0 $margin-fullhd 15vh 0;
     }
     &-item {
       display: flex;
@@ -190,7 +221,8 @@ $circle-size-desktop: 3.2rem;
   }
   &__image {
     position: absolute;
-    max-height: 15rem;
+    width: 20rem;
+    height: auto;
     transition: opacity 0.25s ease-in-out;
     z-index: 9;
   }

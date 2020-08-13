@@ -3,6 +3,8 @@
     class="speaker"
     @mouseover="changeCursor({ color: 'black', hover: false })"
   >
+    <h2 v-if="loading">Loading loading ..</h2>
+    <h2 v-if="error">Oh no! {{ err }}</h2>
     <div class="speaker__image-wrapper" v-if="getSpeaker">
       <div class="speaker__image__wrapper">
         <v-lazy-image
@@ -47,7 +49,9 @@ export default {
     return {
       vm: this,
       name: "",
-      surname: ""
+      surname: "",
+      loading: false,
+      error: null
     };
   },
   props: {
@@ -61,22 +65,35 @@ export default {
       return store.isNavOpen;
     }
   },
-  created() {
-    const [name, surname] = this.nameSurname.split("-");
-    this.name = name;
-    this.name = name;
-    this.surname = surname;
-    this.$store.dispatch("loadSpeaker", {
-      name: this.name,
-      surname: this.surname
-    });
-  },
   destroyed() {
     this.saveSpeaker("");
+  },
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData"
   },
   methods: {
     ...mapActions(["changeCursor"]),
     ...mapMutations(["saveSpeaker"]),
+    fetchData() {
+      this.error = null;
+      this.loading = true;
+      try {
+        const [name, surname] = this.nameSurname.split("-");
+        this.name = name;
+        this.surname = surname;
+        this.$store.dispatch("loadSpeaker", {
+          name: this.name,
+          surname: this.surname
+        });
+      } catch (err) {
+        this.error = err.toString();
+      } finally {
+        this.loading = false;
+      }
+    },
     animateText() {
       gsap.to("body", 0, { css: { visibility: "visible" } });
 

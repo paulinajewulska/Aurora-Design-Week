@@ -3,6 +3,9 @@
     class="event"
     @mouseover="changeCursor({ color: 'red', hover: false })"
   >
+    <h2 v-if="!getEventData">Loading loading ..</h2>
+    <h2 v-if="loading">Loading loading ..</h2>
+    <h2 v-if="error">Oh no! {{ error }}</h2>
     <div class="event__info-wrapper" v-if="getEventData">
       <p class="event__city">{{ getEventData.city }}</p>
       <p class="event__place">{{ getEventData.place }}</p>
@@ -54,7 +57,7 @@
     </div>
     <router-link
       class="event__button-calendar"
-      v-if="!isMenuOpen"
+      v-if="!isMenuOpen && getEventData"
       @mousemove.native="changeCursor({ color: 'red', hover: true })"
       @mouseleave.native="changeCursor({ color: 'black', hover: false })"
       :to="{
@@ -72,7 +75,7 @@ import { store } from "../store/index.js";
 export default {
   name: "Event",
   data: function() {
-    return { vm: this };
+    return { vm: this, loading: false, error: null };
   },
   props: {
     month: {
@@ -88,18 +91,31 @@ export default {
       return store.isNavOpen;
     }
   },
-  created() {
-    this.$store.dispatch("loadPerformances", {
-      month: this.month,
-      date: this.date
-    });
-  },
-  beforeDestroy() {
-    this.savePerformances("");
-  },
   methods: {
     ...mapActions(["changeCursor"]),
-    ...mapMutations(["savePerformances"])
+    ...mapMutations(["savePerformances"]),
+    fetchData() {
+      this.error = null;
+      try {
+        this.$store.dispatch("loadPerformances", {
+          month: this.month,
+          date: this.date
+        });
+      } catch (err) {
+        this.error = err.toString();
+      } finally {
+        this.loading = false;
+      }
+    }
+  },
+  created() {
+    this.fetchData();
+  },
+  destroyed() {
+    this.savePerformances("");
+  },
+  watch: {
+    $route: "fetchData"
   }
 };
 </script>

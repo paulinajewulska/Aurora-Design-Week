@@ -4,6 +4,8 @@
     @mouseover="changeCursor({ color: 'black', hover: false })"
   >
     <h1 class="FAQ__title">{{ name }}</h1>
+    <h2 v-if="loading">Loading loading ..</h2>
+    <h2 v-if="error">Oh no! {{ error }}</h2>
     <div class="FAQ__questions-wrapper">
       <app-f-a-q-question
         v-for="question in questions"
@@ -24,15 +26,31 @@ export default {
   data: function() {
     return {
       name: "Got some question?",
-      vm: this
+      vm: this,
+      loading: false,
+      error: null
     };
   },
   computed: { ...mapState(["questions"]) },
   methods: {
-    ...mapActions(["changeCursor"])
+    ...mapActions(["changeCursor"]),
+    fetchData() {
+      this.error = null;
+      this.loading = true;
+      try {
+        this.$store.dispatch("loadQuestions");
+      } catch (err) {
+        this.error = err.toString();
+      } finally {
+        this.loading = false;
+      }
+    }
   },
-  beforeCreate() {
-    this.$store.dispatch("loadQuestions");
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData"
   },
   components: {
     AppFAQQuestion: FAQQuestion

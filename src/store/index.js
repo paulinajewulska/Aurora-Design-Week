@@ -27,50 +27,7 @@ export default new Vuex.Store({
     performances: "",
     questions: [],
     menu: ["home", "calendar", "speakers", "faq", "contact"],
-    speakers: [
-      {
-        name: "Nnamdi",
-        surname: "Obgonnaya",
-        country: "AU",
-        image: require("../assets/Speakers/jard-rusticus-Ib-4pQtdHt0-unsplash-min.jpg")
-      },
-      {
-        name: "Kweku",
-        surname: "Collins",
-        country: "BE",
-        image: require("../assets/Speakers/brian-lundquist-DwGIBfqLxno-unsplash-min.jpg")
-      },
-      {
-        name: "Kelly",
-        surname: "Owens",
-        country: "AU",
-        image: require("../assets/Speakers/andrey-zvyagintsev-3paYH1ewz3s-unsplash-min.jpg")
-      },
-      {
-        name: "Alex",
-        surname: "Cameron",
-        country: "JP",
-        image: require("../assets/Speakers/denis-agati--5Vl9oimYlU-unsplash-min.jpg")
-      },
-      {
-        name: "Korean",
-        surname: "breakfast",
-        country: "ES",
-        image: require("../assets/Speakers/levi-clancy-WE0gt7t4o2k-unsplash-min.jpg")
-      },
-      {
-        name: "Smino",
-        surname: "Williams",
-        country: "AU",
-        image: require("../assets/Speakers/thomas-mowe-cG-A0o4zV1w-unsplash-min.jpg")
-      },
-      {
-        name: "Josiah",
-        surname: "Faulkner",
-        country: "US",
-        image: require("../assets/Speakers/fayiz-musthafa-yGqsr6EVrGw-unsplash-min.jpg")
-      }
-    ],
+    speakers: [],
     speaker: ""
   },
   getters: {
