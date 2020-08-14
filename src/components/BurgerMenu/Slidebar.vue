@@ -15,7 +15,11 @@
               @mousemove="changeCursor({ color: 'red', hover: true })"
               @mouseleave="changeCursor({ color: 'red', hover: false })"
             >
-              <router-link :to="getPath(item)">{{ item }}</router-link>
+              <router-link
+                :to="getPath(item)"
+                class="sidebar__menu__item-link"
+                >{{ item }}</router-link
+              >
             </li>
           </ul>
         </nav>
@@ -26,6 +30,7 @@
 <script>
 import { store, mutations } from "../../store/index.js";
 import { mapMutations, mapActions } from "vuex";
+import { gsap } from "gsap";
 
 export default {
   data: function() {
@@ -41,6 +46,26 @@ export default {
     },
     getPath(path) {
       return `/${path}`;
+    },
+    animate() {
+      gsap.to("body", 0, { css: { visibility: "visible" } });
+      const menuItems = document.querySelectorAll(".sidebar__menu__item");
+
+      const tl = gsap.timeline();
+      tl.staggerFrom(
+        menuItems,
+        1.5,
+        {
+          y: 100,
+          ease: "power4.inOut",
+          skewY: 2,
+          opacity: 0,
+          stagger: {
+            amount: 0.3
+          }
+        },
+        0.05
+      );
     }
   },
   computed: {
@@ -54,14 +79,28 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/main.scss";
 
-.slide-enter-active,
+.slide-enter-active {
+  animation: coming 0.25s;
+}
 .slide-leave-active {
-  transition: transform 0.05s ease-in-out;
+  animation: going 0.25s;
 }
 
-.slide-enter,
-.slide-leave-to {
-  transition: all 0.05s ease-in-out 0s;
+@keyframes going {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+@keyframes coming {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 .sidebar {
@@ -101,13 +140,22 @@ export default {
     }
     &__item {
       position: relative;
+      margin: 0;
+      padding: 0.5rem 0.5rem 0.5rem 0;
+      cursor: pointer;
+      z-index: 9999;
+    }
+    &__item-link {
+      margin: 0;
+      padding: 0;
       border-bottom: 1px solid $light-gray;
       color: $light-gray;
       font-size: 2.5rem;
       text-align: left;
       text-transform: uppercase;
-      cursor: pointer;
-      z-index: 99999999;
+      @media only screen and (min-width: $desktop) {
+        font-size: 3rem;
+      }
     }
   }
 }
