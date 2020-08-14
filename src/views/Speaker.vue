@@ -242,7 +242,7 @@ export default {
     }
     @media only screen and (min-width: $desktop) {
       position: absolute;
-      bottom: $padding-fullhd/2;
+      bottom: $padding-fullhd/4;
       left: 45vw;
       display: flex;
       flex-direction: column;

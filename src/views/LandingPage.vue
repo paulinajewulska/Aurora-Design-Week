@@ -15,8 +15,12 @@
         <span class="column is-offset-1 landing-page__title__word">Week</span>
       </div>
       <div class="landing-page__title__word-wrapper">
-        <span class="column is-hidden-desktop landing-page__title__word">2020</span>
-        <span class="column is-hidden-touch landing-page__title__word">13-20 July 2020</span>
+        <span class="column is-hidden-desktop landing-page__title__word"
+          >2020</span
+        >
+        <span class="column is-hidden-touch landing-page__title__word"
+          >13-20 July 2020</span
+        >
       </div>
     </h1>
 
@@ -33,7 +37,10 @@
       ></vue-displacement-slideshow>
       <div class="landing-page__slideshow__cover"></div>
     </div>
-    <ul class="landing-page__social-media__list is-hidden-touch" v-if="!isMenuOpen">
+    <ul
+      class="landing-page__social-media__list is-hidden-touch"
+      v-if="!isMenuOpen"
+    >
       <li
         v-for="media in this.socialMedia"
         :key="media.id"
@@ -41,7 +48,9 @@
         @mousemove="changeCursor({ color: 'red', hover: true })"
         @mouseleave="changeCursor({ color: 'red', hover: false })"
       >
-        <a :href="media.link" target="_blank" rel="noreferrer">{{ media.name }}</a>
+        <a :href="media.link" target="_blank" rel="noreferrer">{{
+          media.name
+        }}</a>
       </li>
     </ul>
     <p class="landing-page__scroll-wrapper">

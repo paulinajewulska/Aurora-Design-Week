@@ -185,9 +185,9 @@ $circle-size-desktop: 3.2rem;
       align-items: center;
       justify-content: flex-end;
       margin: 1rem 0;
+      width: 100%;
       font-size: 2.2rem;
       line-height: 2rem;
-      width: 100%;
       @media only screen and (min-width: $tablet) {
         margin: 0;
         font-size: 3.5rem;
@@ -221,7 +221,7 @@ $circle-size-desktop: 3.2rem;
   }
   &__image {
     position: absolute;
-    width: 20rem;
+    width: 15rem;
     height: auto;
     transition: opacity 0.25s ease-in-out;
     z-index: 9;
