@@ -1,44 +1,19 @@
-# Aurora Design Week ✨✨
+# Aurora Design Week
 
-Website 
+Aurora Design Week is a promoting event website, where user can find list of shows and speakers (including short descriptions). There is also a possibility to contact the organizers in "contact" tab.
 
-Live: [link](https://aurora.jewulska.pl)
+Live: [link](https://aurora.jewulska.pl)<br/>
 (Recommended browsers: Opera & Chrome)
 
-Created using [this template](https://www.uistore.design/items/aurora-free-web-elements-for-adobe-xd-and-sketch/)
+<br/>![Aurora design week](aurora-design-week.png)<br/>
 
-## Build Setup
+## Technology stack
+- HTML5
+- Bulma, SCSS
+- Vue, Vuex, Vue Router
 
-### Dependencies
-npm install or yarn install
+## Used templates
+Idea and fragments of layout from [aurora free template](https://www.uistore.design/items/aurora-free-web-elements-for-adobe-xd-and-sketch/).
 
-### Spin up server with reload
-npm run serve
-
-### Build for production
-npm run build
-
-Made with [vue-cli](https://cli.vuejs.org/).
-
-
-## Used photos:
-
-### Landing Page:
-* [Metro](https://unsplash.com/photos/4XIUmOxP2xQ)
-* [Person in a bus](https://unsplash.com/photos/zm438klkxU4)
-* [Dragon](https://unsplash.com/photos/qKeNO57OxWo)
-
-### About section:
-* [People walking on the street](https://unsplash.com/photos/C45XqxDRdbU)
-
-### Speakers section:
-* [Nnamdi Obgonnaya](https://unsplash.com/photos/Ib-4pQtdHt0)
-* [Kweku Collins](https://unsplash.com/photos/DwGIBfqLxno)
-* [Kelly Owens](https://unsplash.com/photos/3paYH1ewz3s)
-* [Alex Cameron](https://unsplash.com/photos/-5Vl9oimYlU)
-* [Korean breakfast](https://unsplash.com/photos/WE0gt7t4o2k)
-* [Smino Williams](https://unsplash.com/photos/cG-A0o4zV1w)
-* [Josiah Faulkner](https://unsplash.com/photos/yGqsr6EVrGw)
-
-## Contact:
-* [Hands](https://unsplash.com/photos/D9kOnC_1AHw)
+## Photos
+All photos downloaded from [Unsplash](https://unsplash.com).
